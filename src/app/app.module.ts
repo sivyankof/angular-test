@@ -13,6 +13,6 @@ import { ThreePageComponent } from './three-page/three-page.component';
     declarations: [AppComponent, FirstPageComponent, SecondPageComponent, ThreePageComponent],
     imports: [BrowserModule, AppRoutingModule, RoutingModule],
     providers: [],
-    bootstrap: [AppComponent, FirstPageComponent],
+    bootstrap: [AppComponent],
 })
 export class AppModule {}

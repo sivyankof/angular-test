@@ -6,11 +6,7 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./first-page.component.scss'],
 })
 export class FirstPageComponent implements OnInit {
+    constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+    ngOnInit(): void {}
 }
-

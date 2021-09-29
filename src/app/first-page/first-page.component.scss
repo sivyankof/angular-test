@@ -1,6 +1,31 @@
-p {
-    line-height: 10rem;
-    text-align: center;
-    font-size: 2rem;
+.container {
     background-color: #ff4000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    h2 {
+        margin: 0 auto;
+        font-size: 2rem;
+        text-align: center;
+        padding: 1rem;
+    }
+
+    .items {
+        display: flex;
+
+        #item {
+            line-height: 5rem;
+            text-align: center;
+            font-size: 2rem;
+            background-color: #ffefdc;
+            list-style: none;
+            margin: 10px;
+            width: 400px;
+        }
+    }
+
+    .btn-toogle-hide {
+        margin: 1rem auto;
+    }
 }

@@ -1,6 +1,25 @@
-p{
-	line-height: 10rem;
+.container {
     text-align: center;
-    font-size: 2rem;
-	background-color: #50b2c0;
+
+    background-color: #ffefdc;
+    height: 20rem;
+
+    p {
+        font-size: 1.2rem;
+        padding: 1rem;
+        font-weight: bold;
+
+        span {
+            font-weight: normal;
+        }
+    }
+    .example-form {
+        margin: 0 auto;
+        min-width: 150px;
+        max-width: 500px;
+        width: 100%;
+    }
+    .example-full-width {
+        width: 100%;
+    }
 }

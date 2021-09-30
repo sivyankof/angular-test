@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./second-page.component.scss'],
 })
 export class SecondPageComponent implements OnInit {
-    constructor() {}
+    inputText: string = 'пусто';
 
+    constructor() {}
     ngOnInit(): void {}
 }

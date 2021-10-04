@@ -11,7 +11,7 @@ p {
     font-weight: bold;
 }
 
-.mat-tab-group {
-    margin-bottom: 48px;
-    // background-color: cadetblue;
+::ng-deep .mat-tab-group .mat-tab-label-content {
+    font-size: 2rem;
+    font-weight: 200;
 }

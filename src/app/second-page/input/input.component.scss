@@ -1,13 +1,13 @@
 .container {
     text-align: center;
+    background-color: cadetblue;
+    height: 95vh;
 
-    background-color: #ffefdc;
-    height: 20rem;
-
-    p {
-        font-size: 1.2rem;
+    h2 {
+        margin: 0 auto;
+        font-size: 2rem;
+        text-align: center;
         padding: 1rem;
-        font-weight: bold;
 
         span {
             font-weight: normal;

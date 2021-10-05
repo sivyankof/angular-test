@@ -56,7 +56,15 @@
         color: darkslategray;
     }
 
-    .btn-toogle-hide {
-        margin: 1rem auto;
+    .wrap-btn {
+        display: flex;
+        justify-content: center;
+
+        .btn-toogle-hide,
+        .btn-active-all-users {
+            min-width: 5rem;
+            width: max-content;
+            margin: 1rem;
+        }
     }
 }

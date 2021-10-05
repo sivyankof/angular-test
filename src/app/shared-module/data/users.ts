@@ -6,4 +6,5 @@ export const users: User[] = [
     { name: 'Misha', age: 25, activated: true },
     { name: 'Marina', age: 30, activated: true },
     { name: 'Vasya', age: 40, activated: true },
+    { name: 'Vasya', age: 13, activated: true },
 ];

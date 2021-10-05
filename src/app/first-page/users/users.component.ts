@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { User } from './user';
-import { UserService } from 'src/app/service/users/user.service';
+import { UserService } from 'src/app/shared-module/users-service/user.service';
+import { UserComponent } from 'src/app/shared-module/components/user/user.component';
 
 @Component({
     selector: 'Users',
@@ -13,11 +14,12 @@ export class UsersComponent implements OnInit {
     public hiddenUsers: boolean = true;
     public allUserActive: User[];
 
+    @ViewChildren(UserComponent) userComponent: QueryList<UserComponent>;
+
     constructor(public usersService: UserService) {}
 
     ngOnInit(): void {
         this.users = this.usersService.getUsers();
-
         this.findActiveUsers();
     }
 
@@ -32,5 +34,13 @@ export class UsersComponent implements OnInit {
 
     findActiveUsers() {
         this.allUserActive = this.users.filter((user) => user.activated);
+    }
+
+    log(user: User) {
+        console.log(user);
+    }
+
+    setActiveAllUsers() {
+        this.userComponent.forEach((user) => user.setActivateUser());
     }
 }

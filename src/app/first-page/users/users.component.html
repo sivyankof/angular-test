@@ -6,15 +6,22 @@
         <user
             *ngFor="let user of users"
             id="item"
+            [class.hidden]="!user.activated && !hiddenUsers"
             [user]="user"
             (toggleActiveUser)="toggleActiveUser($event)"
-            [class.hidden]="!user.activated && !hiddenUsers"
-        ></user>
+            (log)="log($event)"
+        >
+        </user>
     </div>
 
     <!-- <ng-template #emptyData>Not active users</ng-template> -->
+    <div class="wrap-btn">
+        <button class="btn-toogle-hide" mat-raised-button color="primary" (click)="toogleHideUsers()">
+            {{ hiddenUsers ? 'Show only active users' : 'Show all users' }}
+        </button>
 
-    <button class="btn-toogle-hide" mat-raised-button color="primary" (click)="toogleHideUsers()">
-        {{ hiddenUsers ? 'Show only active users' : 'Show all users' }}
-    </button>
+        <button class="btn-active-all-users" mat-stroked-button color="warn" (click)="setActiveAllUsers()">
+            Active all users
+        </button>
+    </div>
 </div>

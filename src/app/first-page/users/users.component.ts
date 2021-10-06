@@ -1,13 +1,13 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { User } from './user';
-import { UserService } from 'src/app/shared-module/users-service/user.service';
+import { User } from './user.interface';
+import { UsersService } from 'src/app/shared-module/users-service/users.service';
 import { UserComponent } from 'src/app/shared-module/components/user/user.component';
 
 @Component({
     selector: 'Users',
     templateUrl: './users.component.html',
     styleUrls: ['./users.component.scss'],
-    providers: [UserService],
+    providers: [UsersService],
 })
 export class UsersComponent implements OnInit {
     public users: User[] = [];
@@ -16,7 +16,7 @@ export class UsersComponent implements OnInit {
 
     @ViewChildren(UserComponent) userComponent: QueryList<UserComponent>;
 
-    constructor(public usersService: UserService) {}
+    constructor(public usersService: UsersService) {}
 
     ngOnInit(): void {
         this.users = this.usersService.getUsers();

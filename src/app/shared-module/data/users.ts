@@ -1,4 +1,4 @@
-import { User } from 'src/app/first-page/users/user';
+import { User } from 'src/app/first-page/users/user.interface';
 
 export const users: User[] = [
     { name: 'Andrey', age: 24, activated: true },

@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { FirstPageComponent } from './first-page/first-page.component';
-import { SecondPageComponent } from './second-page/second-page.component';
-import { ThreePageComponent } from './three-page/three-page.component';
+import { AppComponent } from './app.component';
+import { MenuComponent } from './header/menu/menu.component';
+import { MainContentModule } from './main-content/main-content.module';
+import { FooterModule } from './footer/footer.module';
 
 @NgModule({
-    declarations: [AppComponent, FirstPageComponent, SecondPageComponent, ThreePageComponent],
-    imports: [BrowserModule, AppRoutingModule],
+    declarations: [AppComponent, MenuComponent],
+    imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, MainContentModule, FooterModule],
     providers: [],
     bootstrap: [AppComponent],
 })

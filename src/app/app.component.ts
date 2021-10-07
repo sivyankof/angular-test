@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
     styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+    colorToggle = { value: 'aqua' };
+
     title: string = 'title main-page ';
 }

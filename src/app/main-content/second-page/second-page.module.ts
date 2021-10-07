@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
-import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatRadioModule } from '@angular/material/radio';
 
-import { InputTextComponent } from './input/input.component';
+import { CreateNewUserComponent } from './create-new-user/create-new-user.component';
 
 @NgModule({
-    declarations: [InputTextComponent],
-    imports: [CommonModule, MatInputModule, FormsModule],
-    exports: [InputTextComponent],
+    declarations: [CreateNewUserComponent],
+    imports: [CommonModule, MatInputModule, ReactiveFormsModule, MatRadioModule],
+    exports: [],
 })
 export class SecondPageModule {}

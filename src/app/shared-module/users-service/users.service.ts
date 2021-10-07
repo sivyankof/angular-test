@@ -13,4 +13,12 @@ export class UsersService {
     getUsers(): User[] {
         return users;
     }
+
+    addNewUser(value: any) {
+
+        
+        users.push(value);
+
+        console.log(users);
+    }
 }

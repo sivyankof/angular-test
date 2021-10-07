@@ -1,0 +1,48 @@
+.container {
+    background-color: aliceblue;
+    height: 100%;
+    margin: 0 auto;
+
+    .form-new-user {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 500px;
+        margin: 0 auto;
+        background-color: rgb(31, 29, 29);
+        padding: 50px;
+        border-radius: 10px;
+
+        h2 {
+            margin: 15px 0 40px;
+            text-align: center;
+            color: whitesmoke;
+        }
+
+        ::ng-deep input,
+        mat-radio-button,
+        div {
+            color: aliceblue;
+        }
+
+        div {
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 50px;
+        }
+        mat-form-field,
+        mat-radio-group {
+            padding-bottom: 30px;
+        }
+
+        // div {
+        //     display: flex;
+        //     flex-direction: column;
+        //     padding-bottom: 30px;
+
+        //     span {
+        //         color: red;
+        //     }
+        // }
+    }
+}

@@ -1,4 +1,4 @@
-import { User } from 'src/app/first-page/users/user.interface';
+import { User } from 'src/app/shared-module/interface/user.interface';
 
 export const users: User[] = [
     { name: 'Andrey', age: 24, activated: true },

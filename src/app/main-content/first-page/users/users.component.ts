@@ -1,5 +1,5 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { User } from './user.interface';
+import { User } from '../../../shared-module/interface/user.interface';
 import { UsersService } from 'src/app/shared-module/users-service/users.service';
 import { UserComponent } from 'src/app/shared-module/components/user/user.component';
 

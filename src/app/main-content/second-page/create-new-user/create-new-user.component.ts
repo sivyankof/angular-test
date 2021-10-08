@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { UsersService } from 'src/app/shared-module/users-service/users.service';
 
@@ -9,7 +10,7 @@ import { UsersService } from 'src/app/shared-module/users-service/users.service'
     styleUrls: ['./create-new-user.component.scss'],
 })
 export class CreateNewUserComponent implements OnInit {
-    constructor(private usersSerive: UsersService) {}
+    constructor(private usersSerive: UsersService, private router: Router) {}
 
     formCreacteUser: FormGroup = new FormGroup({
         firstName: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
@@ -26,15 +27,16 @@ export class CreateNewUserComponent implements OnInit {
         console.log('IS_VALID', this.formCreacteUser.valid);
 
         if (this.formCreacteUser.valid) {
-            console.log('new User', this.formCreacteUser.value);
-
             this.usersSerive.addNewUser(this.formCreacteUser.value);
+
+            this.router.navigate(['']);
         }
         return;
     }
 
-    // get form() {
-    //     console.log(this.count);
-    //     return this.formCreacteUser.get('firstName');
-    // }
+    isInvalid(value: string) {
+        // console.log(this.formCreacteUser.get(value).errors);
+        console.log(this.formCreacteUser.get(value).invalid);
+        return this.formCreacteUser.get(value).invalid;
+    }
 }

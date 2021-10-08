@@ -1,4 +1,6 @@
-import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChildren, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+
 import { User } from '../../../shared-module/interface/user.interface';
 import { UsersService } from 'src/app/shared-module/users-service/users.service';
 import { UserComponent } from 'src/app/shared-module/components/user/user.component';
@@ -9,17 +11,28 @@ import { UserComponent } from 'src/app/shared-module/components/user/user.compon
     styleUrls: ['./users.component.scss'],
     providers: [UsersService],
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent implements OnInit, OnDestroy {
     public users: User[] = [];
     public hiddenUsers: boolean = true;
     public allUserActive: User[];
+    private sub: Subscription = new Subscription();
 
     @ViewChildren(UserComponent) userComponent: QueryList<UserComponent>;
 
     constructor(public usersService: UsersService) {}
 
     ngOnInit(): void {
-        this.users = this.usersService.getUsers();
+        this.sub.add(
+            this.usersService.getUsers().subscribe(
+                (date) => {
+                    this.users = date;
+                },
+                (err) => {
+                    console.log('err', err);
+                    this.users = [];
+                },
+            ),
+        );
         this.findActiveUsers();
     }
 
@@ -42,5 +55,9 @@ export class UsersComponent implements OnInit {
 
     setActiveAllUsers() {
         this.userComponent.forEach((user) => user.setActivateUser());
+    }
+
+    ngOnDestroy() {
+        this.sub.unsubscribe();
     }
 }

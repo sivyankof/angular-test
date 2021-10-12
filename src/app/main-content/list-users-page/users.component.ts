@@ -2,7 +2,7 @@ import { Component, OnInit, QueryList, ViewChildren, OnDestroy } from '@angular/
 import { Subscription } from 'rxjs';
 
 import { User } from 'src/app/shared-module/interface/user.interface';
-import { UsersService } from 'src/app/shared-module/users-service/users.service';
+import { UsersService } from 'src/app/shared-module/service/users.service';
 import { UserComponent } from 'src/app/shared-module/components/user/user.component';
 
 @Component({
@@ -24,10 +24,10 @@ export class UsersComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.sub.add(
             this.usersService.getUsers().subscribe(
-                (date) => {
+                (date: User[]) => {
                     this.users = date;
                 },
-                (err) => {
+                (err: any) => {
                     console.log('err', err);
                     this.users = [];
                 },

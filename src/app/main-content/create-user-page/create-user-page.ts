@@ -12,4 +12,4 @@ import { MatButtonModule } from '@angular/material/button';
     imports: [CommonModule, MatInputModule, ReactiveFormsModule, MatRadioModule, MatButtonModule],
     exports: [],
 })
-export class SecondPageModule {}
+export class CreateUserPageModule {}

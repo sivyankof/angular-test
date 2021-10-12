@@ -10,24 +10,24 @@ import { UsersService } from 'src/app/shared-module/users-service/users.service'
     styleUrls: ['./create-new-user.component.scss'],
 })
 export class CreateNewUserComponent implements OnInit {
-    constructor(private usersSerive: UsersService, private router: Router) {}
+    constructor(private usersService: UsersService, private router: Router) {}
 
-    formCreacteUser: FormGroup = new FormGroup({
+    formCreateUser: FormGroup = new FormGroup({
         firstName: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
         lastName: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
         age: new FormControl('', [Validators.min(16), Validators.required, Validators.pattern(/^[0-9]+(?!.)/)]),
         company: new FormControl('', [, Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
-        departament: new FormControl('', [, Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
+        department: new FormControl('', [, Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
         photo: new FormControl(''),
         gender: new FormControl('', Validators.required),
     });
     ngOnInit(): void {}
 
     saveNewUser() {
-        console.log('IS_VALID', this.formCreacteUser.valid);
+        console.log('IS_VALID', this.formCreateUser.valid);
 
-        if (this.formCreacteUser.valid) {
-            this.usersSerive.addNewUser(this.formCreacteUser.value);
+        if (this.formCreateUser.valid) {
+            this.usersService.addNewUser(this.formCreateUser.value);
 
             this.router.navigate(['']);
         }
@@ -35,8 +35,7 @@ export class CreateNewUserComponent implements OnInit {
     }
 
     isInvalid(value: string) {
-        // console.log(this.formCreacteUser.get(value).errors);
-        console.log(this.formCreacteUser.get(value).invalid);
-        return this.formCreacteUser.get(value).invalid;
+        console.log(this.formCreateUser.get(value).invalid);
+        return this.formCreateUser.get(value).invalid;
     }
 }

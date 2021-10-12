@@ -1,7 +1,7 @@
 import { Component, OnInit, QueryList, ViewChildren, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { User } from '../../../shared-module/interface/user.interface';
+import { User } from 'src/app/shared-module/interface/user.interface';
 import { UsersService } from 'src/app/shared-module/users-service/users.service';
 import { UserComponent } from 'src/app/shared-module/components/user/user.component';
 
@@ -36,7 +36,7 @@ export class UsersComponent implements OnInit, OnDestroy {
         this.findActiveUsers();
     }
 
-    toogleHideUsers() {
+    toggleHideUsers() {
         this.hiddenUsers = !this.hiddenUsers;
     }
 

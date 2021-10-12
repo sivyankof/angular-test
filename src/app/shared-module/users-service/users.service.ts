@@ -10,7 +10,13 @@ import { users } from '../data/users';
 export class UsersService {
     constructor() {}
 
-    getUsers(): User[] {
-        return users;
+    getUsers(): Observable<User[]> {
+        return of(users);
+    }
+
+    addNewUser(value: any): Observable<User> {
+        users.push(value);
+
+        return value;
     }
 }

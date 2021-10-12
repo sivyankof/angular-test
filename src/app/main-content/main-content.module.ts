@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FirstPageModule } from './first-page/first-page.module';
-import { SecondPageModule } from './second-page/second-page.module';
-import { ThreePageComponent } from './three-page/three-page.component';
+import { UsersPageModule } from './list-users-page/users.module';
+import { CreateUserPageModule } from './create-user-page/create-user-page';
 
 @NgModule({
-    declarations: [ThreePageComponent],
-    imports: [CommonModule, FirstPageModule, SecondPageModule],
+    declarations: [],
+    imports: [CommonModule, UsersPageModule, CreateUserPageModule],
 })
 export class MainContentModule {}

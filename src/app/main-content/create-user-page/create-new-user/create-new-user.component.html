@@ -1,0 +1,57 @@
+<div class="container">
+    <h2>Create New User</h2>
+    <form class="form-new-user" [formGroup]="formCreateUser" (ngSubmit)="saveNewUser()">
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="firstName" />
+            <!-- <mat-error *ngIf="isInvalid('firstName')"> Name is required </mat-error>
+            <mat-error *ngIf="isInvalid('firstName')"> Min name length 3</mat-error>
+            <mat-error *ngIf="isInvalid('firstName')"> Max name length 20</mat-error> -->
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="lastName" />
+            <!-- <mat-error *ngIf="form.errors?.required"> Last Name is required </mat-error>
+            <mat-error *ngIf="form.errors?.maxlength"> Max name length 20</mat-error> -->
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Age</mat-label>
+            <input matInput formControlName="age" />
+            <!-- <mat-error *ngIf="form.errors?.min"> Min 16 age </mat-error>
+            <mat-error *ngIf="form.errors?.required"> Age is required </mat-error>
+            <mat-error *ngIf="form.errors?.pattern?['/^[0-9]+(?!.)/']"> Only numbers are allowed</mat-error> -->
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Company</mat-label>
+            <input matInput formControlName="company" />
+            <!-- <mat-error *ngIf="form.errors?.min"> Min 16 age </mat-error>
+            <mat-error *ngIf="form.errors?.required"> Age is required </mat-error>
+            <mat-error *ngIf="form.errors?.pattern?['/^[0-9]+(?!.)/']"> Only numbers are allowed</mat-error> -->
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Department</mat-label>
+            <input matInput formControlName="department" />
+            <!-- <mat-error *ngIf="form.errors?.min"> Min 16 age </mat-error>
+            <mat-error *ngIf="form.errors?.required"> Age is required </mat-error>
+            <mat-error *ngIf="form.errors?.pattern?['/^[0-9]+(?!.)/']"> Only numbers are allowed</mat-error> -->
+        </mat-form-field>
+
+        <div>
+            <label for="photo">Photo</label>
+
+            <input #uploader class="btn-file" type="file" name="photo" formControlName="photo" />
+            <button mat-stroked-button color="accent" (click)="uploader.click()">Upload</button>
+        </div>
+
+        <mat-radio-group aria-label="Select an option" formControlName="gender">
+            <mat-radio-button value="Men">Men</mat-radio-button>
+            <mat-radio-button value="Woman">Woman</mat-radio-button>
+        </mat-radio-group>
+
+        <button mat-raised-button color="warn" type="submit">Save</button>
+    </form>
+</div>

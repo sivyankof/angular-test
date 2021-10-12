@@ -1,7 +1,8 @@
-<nav>
-    <ul>
-        <li><a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">First page</a></li>
-        <li><a routerLink="second-page" routerLinkActive="active">Second page</a></li>
-        <li><a routerLink="three-page" routerLinkActive="active">Three page</a></li>
-    </ul>
-</nav>
+<mat-nav-list class="nav-list">
+    <mat-list-item>
+        <a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">List of users</a>
+    </mat-list-item>
+    <mat-list-item>
+        <a routerLink="second-page" routerLinkActive="active">Create a new user</a>
+    </mat-list-item>
+</mat-nav-list>

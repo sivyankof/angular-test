@@ -9,4 +9,4 @@ import { MatButtonModule } from '@angular/material/button';
     declarations: [UsersComponent, UserComponent],
     imports: [CommonModule, MatCardModule, MatButtonModule],
 })
-export class UsersModule {}
+export class UsersPageModule {}

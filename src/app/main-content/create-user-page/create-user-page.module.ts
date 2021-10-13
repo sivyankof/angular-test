@@ -5,10 +5,12 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { CreateNewUserComponent } from './create-new-user/create-new-user.component';
+import { CreateNewUserShellComponent } from './create-new-user-shell/create-new-user-shell.component';
+import { FormAddUserComponent } from './form-add-user/form-add-user.component';
+import { ErrorValidatorComponent } from './error-validator/error-validator.component';
 
 @NgModule({
-    declarations: [CreateNewUserComponent],
+    declarations: [CreateNewUserShellComponent, FormAddUserComponent, ErrorValidatorComponent],
     imports: [CommonModule, MatInputModule, ReactiveFormsModule, MatRadioModule, MatButtonModule],
     exports: [],
 })

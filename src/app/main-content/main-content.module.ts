@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import { UsersPageModule } from './list-users-page/users.module';
-import { CreateUserPageModule } from './create-user-page/create-user-page';
+import { CreateUserPageModule } from './create-user-page/create-user-page.module';
 
 @NgModule({
     declarations: [],

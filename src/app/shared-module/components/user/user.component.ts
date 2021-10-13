@@ -18,7 +18,7 @@ export class UserComponent implements OnInit {
 
     ngOnInit(): void {}
 
-    toggleActivated(user: User) {
+    public toggleActivated(user: User) {
         if (user.age <= 18) {
             this.errorMes = true;
             setTimeout(() => (this.errorMes = false), 2000);
@@ -27,11 +27,11 @@ export class UserComponent implements OnInit {
         this.toggleActiveUser.emit(user);
     }
 
-    showLog() {
+    public showLog() {
         this.log.emit(this.user);
     }
 
-    setActivateUser() {
+    public setActivateUser() {
         this.user.activated = true;
     }
 }

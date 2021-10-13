@@ -1,0 +1,60 @@
+<div class="form-new-user" [formGroup]="formCreateUser">
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="firstName" />
+        <mat-error>
+            <app-error-validator [control]="formCreateUser.get('firstName')"></app-error-validator>
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Last Name</mat-label>
+        <input matInput formControlName="lastName" />
+        <mat-error>
+            <app-error-validator [control]="formCreateUser.get('lastName')"></app-error-validator>
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Age</mat-label>
+        <input type="number" matInput formControlName="age" />
+        <mat-error>
+            <app-error-validator [control]="formCreateUser.get('age')"></app-error-validator>
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Company</mat-label>
+        <input matInput formControlName="company" />
+        <mat-error>
+            <app-error-validator [control]="formCreateUser.get('company')"></app-error-validator>
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Department</mat-label>
+        <input matInput formControlName="department" />
+        <mat-error>
+            <app-error-validator [control]="formCreateUser.get('department')"></app-error-validator>
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" />
+        <mat-error>
+            <app-error-validator [control]="formCreateUser.get('email')"></app-error-validator>
+        </mat-error>
+    </mat-form-field>
+
+    <div>
+        <label for="photo">Photo</label>
+        <input #uploader class="btn-file" type="file" name="photo" formControlName="photo" />
+        <button mat-stroked-button color="accent" (click)="uploader.click()">Upload</button>
+    </div>
+
+    <mat-radio-group aria-label="Select an option" formControlName="gender">
+        <mat-radio-button value="Man">Man</mat-radio-button>
+        <mat-radio-button value="Woman">Woman</mat-radio-button>
+    </mat-radio-group>
+</div>

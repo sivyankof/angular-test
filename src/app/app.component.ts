@@ -5,8 +5,4 @@ import { Component } from '@angular/core';
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-    colorToggle = { value: 'aqua' };
-
-    title: string = 'title main-page ';
-}
+export class AppComponent {}

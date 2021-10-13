@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { take } from 'rxjs/operators';
 
 import { UsersService } from 'src/app/shared-module/service/users.service';
-import { FormAddUserComponent } from '../form-add-user/form-add-user.component';
+import { FormAddUserComponent } from '../../components/form-add-user/form-add-user.component';
 
 @Component({
     selector: 'app-create-new-user-shell',

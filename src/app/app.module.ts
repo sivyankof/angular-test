@@ -1,17 +1,15 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatListModule } from '@angular/material/list';
 
 import { AppComponent } from './app.component';
-import { MenuComponent } from './header/menu/menu.component';
-import { MainContentModule } from './main-content/main-content.module';
-import { FooterModule } from './footer/footer.module';
+import { AppRoutingModule } from './app-routing.module';
+import { HeaderModule } from './features/header/header.module';
+import { UsersModule } from './features/users/users.module';
 
 @NgModule({
-    declarations: [AppComponent, MenuComponent],
-    imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, MainContentModule, FooterModule, MatListModule],
+    declarations: [AppComponent],
+    imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, UsersModule, HeaderModule],
     providers: [],
     bootstrap: [AppComponent],
 })

@@ -7,11 +7,11 @@ import { UserComponent } from 'src/app/shared-module/components/user/user.compon
 
 @Component({
     selector: 'Users',
-    templateUrl: './users.component.html',
-    styleUrls: ['./users.component.scss'],
+    templateUrl: './list-users-shell.component.html',
+    styleUrls: ['./list-users-shell.component.scss'],
     providers: [UsersService],
 })
-export class UsersComponent implements OnInit {
+export class ListUsersComponent implements OnInit {
     public users: User[] = [];
     public hiddenUsers: boolean = true;
     public allUserActive: User[];

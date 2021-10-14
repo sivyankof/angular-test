@@ -5,12 +5,15 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
+import { MatTabsModule } from '@angular/material/tabs';
+import { TextFieldModule } from '@angular/cdk/text-field';
 
 import { CreateNewUserShellComponent } from './containers/create-new-user-shell/create-new-user-shell.component';
 import { FormAddUserComponent } from './components/form-add-user/form-add-user.component';
 import { ErrorValidatorComponent } from './components/error-validator/error-validator.component';
 import { ListUsersComponent } from './containers/list-users-shell/list-users-shell.component';
 import { UserComponent } from 'src/app/shared-module/components/user/user.component';
+import { AddressComponent } from './components/address/address.component';
 
 @NgModule({
     declarations: [
@@ -19,8 +22,18 @@ import { UserComponent } from 'src/app/shared-module/components/user/user.compon
         ErrorValidatorComponent,
         ListUsersComponent,
         UserComponent,
+        AddressComponent,
     ],
-    imports: [CommonModule, MatInputModule, ReactiveFormsModule, MatRadioModule, MatButtonModule, MatCardModule],
+    imports: [
+        CommonModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        MatRadioModule,
+        MatButtonModule,
+        MatCardModule,
+        MatTabsModule,
+        TextFieldModule,
+    ],
     exports: [],
 })
 export class UsersModule {}

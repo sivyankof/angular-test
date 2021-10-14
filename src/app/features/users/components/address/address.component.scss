@@ -1,4 +1,4 @@
-.form-new-user {
+.form-address {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -9,7 +9,9 @@
     border-radius: 10px;
 
     ::ng-deep input,
-    mat-radio-button {
+    textarea,
+    mat-radio-button,
+    div {
         color: aliceblue;
         padding-right: 30px;
     }
@@ -29,8 +31,4 @@
     mat-radio-group {
         padding-bottom: 15px;
     }
-}
-
-::ng-deep mat-tab-group {
-    background-color: #1f1d1d;
 }

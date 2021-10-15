@@ -2,11 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-    selector: 'app-address',
-    templateUrl: './address.component.html',
-    styleUrls: ['./address.component.scss'],
+    selector: 'app-form-address',
+    templateUrl: './form-address.component.html',
+    styleUrls: ['./form-address.component.scss'],
 })
-export class AddressComponent implements OnInit {
+export class FormAddressComponent implements OnInit {
     @Input() parentFormGroup: FormGroup;
 
     constructor() {}

@@ -14,7 +14,7 @@ import { FormAddUserComponent } from './components/form-add-user/form-add-user.c
 import { ErrorValidatorComponent } from './components/error-validator/error-validator.component';
 import { ListUsersComponent } from './containers/list-users-shell/list-users-shell.component';
 import { UserComponent } from 'src/app/shared-module/components/user/user.component';
-import { AddressComponent } from './components/address/address.component';
+import { FormAddressComponent } from './components/form-address/form-address.component';
 
 @NgModule({
     declarations: [
@@ -23,7 +23,7 @@ import { AddressComponent } from './components/address/address.component';
         ErrorValidatorComponent,
         ListUsersComponent,
         UserComponent,
-        AddressComponent,
+        FormAddressComponent,
     ],
     imports: [
         CommonModule,

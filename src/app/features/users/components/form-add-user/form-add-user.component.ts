@@ -1,5 +1,6 @@
+import { newArray } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ValidationErrors, Validators, FormArray } from '@angular/forms';
 
 import { Observable } from 'rxjs';
 
@@ -30,10 +31,16 @@ export class FormAddUserComponent implements OnInit {
                 [this.repeatEmailValidator.bind(this)],
             ),
             activated: new FormControl(true),
+            addresses: new FormArray([]),
         });
     }
 
+    addChildForm(formAddresses: FormGroup) {
+        (this.formCreateUser.get('addresses') as FormArray).push(formAddresses);
+    }
+
     public saveUser() {
+        console.log(this.formCreateUser);
         return this.formCreateUser;
     }
 

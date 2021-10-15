@@ -62,5 +62,7 @@
         </div>
     </mat-tab>
 
-    <mat-tab label="Address"><app-form-address [parentFormGroup]="formCreateUser"></app-form-address></mat-tab>
+    <mat-tab label="Address">
+        <app-form-address (childFormAddress)="addChildForm($event)"></app-form-address>
+    </mat-tab>
 </mat-tab-group>

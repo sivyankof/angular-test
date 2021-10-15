@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -7,41 +7,40 @@ import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
     styleUrls: ['./form-address.component.scss'],
 })
 export class FormAddressComponent implements OnInit {
-    @Input() parentFormGroup: FormGroup;
+    @Output() childFormAddress = new EventEmitter<any>();
+
+    public currentForm: FormGroup = new FormGroup({ addresses: new FormArray([]) });
 
     constructor() {}
 
     ngOnInit(): void {
-        this.parentFormGroup.addControl('addresses', new FormArray([this.initAddress()]));
+        this.addNewAddress();
+        this.childFormAddress.emit(this.currentForm.get('addresses'));
     }
 
-    private initAddress(): any {
-        return new FormGroup({
-            address: new FormControl('', Validators.required),
-            city: new FormControl(''),
-            zip: new FormControl({ value: '', disabled: true }),
-        });
-    }
-
-    addNewAddress() {
-        (this.parentFormGroup.get('addresses') as FormArray).push(this.initAddress());
+    public addNewAddress(): any {
+        (this.currentForm.get('addresses') as FormArray).push(
+            new FormGroup({
+                address: new FormControl('', Validators.required),
+                city: new FormControl(''),
+                zip: new FormControl({ value: '', disabled: true }, Validators.required),
+            }),
+        );
     }
 
     get addressesControls(): any {
-        return (this.parentFormGroup.get('addresses') as FormArray).controls;
+        return (this.currentForm.get('addresses') as FormArray).controls;
     }
 
     hasValue(formAddress: FormGroup) {
         if (formAddress.get('city').value) {
             formAddress.get('zip').enable();
-            formAddress.get('zip').addValidators(Validators.required);
         } else {
             formAddress.get('zip').disable();
             formAddress.get('zip').setValue('');
-            formAddress.get('zip').removeValidators(Validators.required);
         }
     }
-    deleteAddressControl(index: number) {
-        (this.parentFormGroup.get('addresses') as FormArray).controls.splice(index, 1);
+    deleteAddressControl(i) {
+        (this.currentForm.get('addresses') as FormArray).removeAt(i);
     }
 }

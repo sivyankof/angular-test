@@ -1,4 +1,4 @@
-<ng-container [formGroup]="parentFormGroup">
+<div [formGroup]="currentForm">
     <div formArrayName="addresses">
         <div
             *ngFor="let formAddress of addressesControls; let i = index"
@@ -6,7 +6,6 @@
             class="form-address"
         >
             <button
-                *ngIf="i !== 0"
                 mat-fab
                 color="primary"
                 aria-label="Example icon button with a delete icon"
@@ -38,4 +37,4 @@
         </div>
         <button mat-stroked-button color="warn" (click)="addNewAddress()">Add new address</button>
     </div>
-</ng-container>
+</div>

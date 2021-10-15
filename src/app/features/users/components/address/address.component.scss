@@ -1,34 +1,50 @@
-.form-address {
+div {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 500px;
-    margin: 0 auto;
-    background-color: rgb(31, 29, 29);
-    padding: 50px;
-    border-radius: 10px;
 
-    ::ng-deep input,
-    textarea,
-    mat-radio-button,
-    div {
-        color: aliceblue;
-        padding-right: 30px;
-    }
-
-    div {
+    .form-address {
         display: flex;
         flex-direction: column;
-        padding-bottom: 15px;
+        justify-content: center;
+        width: 500px;
+        margin: 0 auto;
+        background-color: rgb(31, 29, 29);
+        padding: 20px 50px 0 50px;
+        border-radius: 10px;
 
-        .btn-file {
-            visibility: hidden;
-            background-color: red;
+        ::ng-deep input,
+        textarea,
+        mat-radio-button,
+        div {
+            color: aliceblue;
+            padding-right: 30px;
+        }
+
+        div {
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 15px;
+
+            .btn-file {
+                visibility: hidden;
+                background-color: red;
+            }
+        }
+
+        mat-form-field,
+        mat-radio-group {
+            padding-bottom: 15px;
         }
     }
 
-    mat-form-field,
-    mat-radio-group {
-        padding-bottom: 15px;
+    button {
+        &:first-child {
+            align-self: flex-end;
+            margin: 0px 0 20px;
+        }
+
+        align-self: center;
+        margin-bottom: 40px;
     }
 }

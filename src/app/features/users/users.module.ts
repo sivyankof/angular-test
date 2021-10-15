@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
 import { TextFieldModule } from '@angular/cdk/text-field';
+import { MatIconModule } from '@angular/material/icon';
 
 import { CreateNewUserShellComponent } from './containers/create-new-user-shell/create-new-user-shell.component';
 import { FormAddUserComponent } from './components/form-add-user/form-add-user.component';
@@ -33,6 +34,7 @@ import { AddressComponent } from './components/address/address.component';
         MatCardModule,
         MatTabsModule,
         TextFieldModule,
+        MatIconModule,
     ],
     exports: [],
 })

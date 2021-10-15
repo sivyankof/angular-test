@@ -9,7 +9,8 @@
     border-radius: 10px;
 
     ::ng-deep input,
-    mat-radio-button {
+    mat-radio-button,
+    div {
         color: aliceblue;
         padding-right: 30px;
     }

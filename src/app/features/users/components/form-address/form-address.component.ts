@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
     selector: 'app-form-address',
@@ -16,6 +16,7 @@ export class FormAddressComponent implements OnInit {
     ngOnInit(): void {
         this.addNewAddress();
         this.childFormAddress.emit(this.currentForm.get('addresses'));
+        this.currentForm.get('addresses').statusChanges.subscribe(() => this.hasValue());
     }
 
     public addNewAddress(): any {
@@ -28,19 +29,24 @@ export class FormAddressComponent implements OnInit {
         );
     }
 
-    get addressesControls(): any {
+    get addressesControls(): AbstractControl[] {
         return (this.currentForm.get('addresses') as FormArray).controls;
     }
 
-    hasValue(formAddress: FormGroup) {
-        if (formAddress.get('city').value) {
-            formAddress.get('zip').enable();
-        } else {
-            formAddress.get('zip').disable();
-            formAddress.get('zip').setValue('');
-        }
+    hasValue() {
+        const arrControls = (this.currentForm.get('addresses') as FormArray).controls;
+
+        arrControls.forEach((group) => {
+            if (group.get('city').value.length >= 1) {
+                group.get('zip').enable({ emitEvent: false });
+            } else {
+                group.get('zip').disable({ emitEvent: false });
+                group.get('zip').setValue('', { emitEvent: false });
+            }
+        });
     }
-    deleteAddressControl(i) {
+
+    deleteAddressControl(i: number) {
         (this.currentForm.get('addresses') as FormArray).removeAt(i);
     }
 }

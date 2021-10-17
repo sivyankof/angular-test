@@ -1,14 +1,17 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
     selector: 'app-form-address',
     templateUrl: './form-address.component.html',
     styleUrls: ['./form-address.component.scss'],
 })
-export class FormAddressComponent implements OnInit {
+export class FormAddressComponent implements OnInit, OnDestroy {
     @Output() childFormAddress = new EventEmitter<any>();
 
+    private destroy$ = new Subject();
     public currentForm: FormGroup = new FormGroup({ addresses: new FormArray([]) });
 
     constructor() {}
@@ -16,7 +19,10 @@ export class FormAddressComponent implements OnInit {
     ngOnInit(): void {
         this.addNewAddress();
         this.childFormAddress.emit(this.currentForm.get('addresses'));
-        this.currentForm.get('addresses').statusChanges.subscribe(() => this.hasValue());
+        this.currentForm
+            .get('addresses')
+            .statusChanges.pipe(takeUntil(this.destroy$))
+            .subscribe(() => this.hasValue());
     }
 
     public addNewAddress(): any {
@@ -48,5 +54,10 @@ export class FormAddressComponent implements OnInit {
 
     deleteAddressControl(i: number) {
         (this.currentForm.get('addresses') as FormArray).removeAt(i);
+    }
+
+    ngOnDestroy() {
+        this.destroy$.next(null);
+        this.destroy$.complete();
     }
 }

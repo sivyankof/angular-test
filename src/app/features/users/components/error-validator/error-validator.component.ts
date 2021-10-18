@@ -27,6 +27,7 @@ export class ErrorValidatorComponent implements OnInit, DoCheck {
 
     ngDoCheck() {
         let typeErr = this.control.errors;
+
         for (const err in typeErr) {
             this.errorMessage = this.message[err]();
         }

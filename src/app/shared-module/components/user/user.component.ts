@@ -2,7 +2,7 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { User } from '../../interface/user.interface';
 
 @Component({
-    selector: 'user',
+    selector: 'app-user',
     templateUrl: './user.component.html',
     styleUrls: ['./user.component.scss'],
 })

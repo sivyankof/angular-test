@@ -2,7 +2,7 @@
     <h2 class="title">first-page</h2>
 
     <div class="items">
-        <user
+        <app-user
             *ngFor="let user of users"
             id="item"
             [class.hidden]="!user.activated && !hiddenUsers"
@@ -10,7 +10,7 @@
             (toggleActiveUser)="toggleActiveUser($event)"
             (log)="log($event)"
         >
-        </user>
+        </app-user>
     </div>
 
     <div class="wrap-btn">

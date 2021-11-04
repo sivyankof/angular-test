@@ -1,20 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatInputModule } from '@angular/material/input';
-import { MatRadioModule } from '@angular/material/radio';
-import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatCardModule } from '@angular/material/card';
-import { MatTabsModule } from '@angular/material/tabs';
-import { TextFieldModule } from '@angular/cdk/text-field';
-import { MatIconModule } from '@angular/material/icon';
+
+import { SharedModule } from 'src/app/shared-module/components/shared.module';
+import { MaterialModule } from 'src/app/shared-module/material/material.module';
 
 import { CreateNewUserShellComponent } from './containers/create-new-user-shell/create-new-user-shell.component';
 import { FormAddUserComponent } from './components/form-add-user/form-add-user.component';
 import { ErrorValidatorComponent } from './components/error-validator/error-validator.component';
 import { ListUsersComponent } from './containers/list-users-shell/list-users-shell.component';
-import { UserComponent } from 'src/app/shared-module/components/user/user.component';
 import { FormAddressComponent } from './components/form-address/form-address.component';
+import { EditUserShellComponent } from './containers/edit-user-shell/edit-user-shell.component';
+import { FormEditUserComponent } from './components/form-edit-user/form-edit-user.component';
 
 @NgModule({
     declarations: [
@@ -22,20 +19,11 @@ import { FormAddressComponent } from './components/form-address/form-address.com
         FormAddUserComponent,
         ErrorValidatorComponent,
         ListUsersComponent,
-        UserComponent,
         FormAddressComponent,
+        EditUserShellComponent,
+        FormEditUserComponent,
     ],
-    imports: [
-        CommonModule,
-        MatInputModule,
-        ReactiveFormsModule,
-        MatRadioModule,
-        MatButtonModule,
-        MatCardModule,
-        MatTabsModule,
-        TextFieldModule,
-        MatIconModule,
-    ],
+    imports: [CommonModule, ReactiveFormsModule, MaterialModule, SharedModule],
     exports: [],
 })
 export class UsersModule {}

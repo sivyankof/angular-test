@@ -1,10 +1,10 @@
 import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { take } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 import { User } from 'src/app/shared-module/interface/user.interface';
 import { UsersService } from 'src/app/shared-module/service/users.service';
 import { UserComponent } from 'src/app/shared-module/components/user/user.component';
-import { Router } from '@angular/router';
 
 @Component({
     selector: 'Users',
@@ -26,32 +26,27 @@ export class ListUsersComponent implements OnInit {
             .getUsers()
             .pipe(take(1))
             .subscribe(
-                (date: User[]) => {
-                    this.users = date;
-                },
-                (err: any) => {
-                    console.log('err', err);
-                    this.users = [];
-                },
+                (date: User[]) => (this.users = date),
+                (err: any) => (this.users = []),
             ),
             this.findActiveUsers();
     }
 
-    public toggleHideUsers() {
+    updateListUsers(data: User[]) {
+        this.users = data;
+    }
+
+    toggleHideUsers() {
         this.hiddenUsers = !this.hiddenUsers;
     }
 
-    private toggleActiveUser(user: User): void {
+    toggleActiveUser(user: User): void {
         user.activated = !user.activated;
         this.findActiveUsers();
     }
 
-    private findActiveUsers() {
+    findActiveUsers() {
         this.allUserActive = this.users.filter((user) => user.activated);
-    }
-
-    private log(user: User) {
-        console.log(user);
     }
 
     setActiveAllUsers() {

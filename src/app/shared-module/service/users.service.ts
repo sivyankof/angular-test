@@ -1,6 +1,6 @@
 import { TOUCH_BUFFER_MS } from '@angular/cdk/a11y/input-modality/input-modality-detector';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
+import { BehaviorSubject, from, Observable, of, Subject } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
 import { User } from 'src/app/shared-module/interface/user.interface';
@@ -21,6 +21,10 @@ export class UsersService {
     }
 
     getUsers(): Observable<User[]> {
+        return of(users).pipe(delay(1000));
+    }
+
+    getFilterUsers(): Observable<any> {
         return of(users).pipe(delay(1000));
     }
 

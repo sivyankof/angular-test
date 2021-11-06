@@ -1,5 +1,5 @@
 <mat-card id="item" [ngClass]="{ 'non-active': !user.activated }">
-    <mat-card-title> {{ user.firstName }}</mat-card-title>
+    <mat-card-title class="title"><mat-icon>person</mat-icon> {{ user.firstName }}</mat-card-title>
 
     <mat-card-content>
         <span>age: {{ user.age }}</span
@@ -12,8 +12,6 @@
     <button mat-flat-button color="primary" [disabled]="!user.activated" (click)="toggleActivated(user)">
         {{ user.activated ? 'Non-Active' : 'Active' }}
     </button>
-
-    <button mat-flat-button color="primary" (click)="showLog()">Log</button>
 
     <button mat-flat-button color="warn" class="setting-btn" (click)="onSetting()">
         <mat-icon class="icon">settings</mat-icon>

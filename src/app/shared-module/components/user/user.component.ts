@@ -11,7 +11,6 @@ export class UserComponent implements OnInit {
     @Input() id: number;
     @Input() hiddenUsers: Boolean;
     @Output() toggleActiveUser: EventEmitter<User> = new EventEmitter();
-    @Output() log: EventEmitter<User> = new EventEmitter();
     @Output() openSetting: EventEmitter<any> = new EventEmitter();
 
     public errorMes: boolean = false;
@@ -27,10 +26,6 @@ export class UserComponent implements OnInit {
             return;
         }
         this.toggleActiveUser.emit(user);
-    }
-
-    showLog() {
-        this.log.emit(this.user);
     }
 
     setActivateUser() {

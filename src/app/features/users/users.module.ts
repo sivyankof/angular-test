@@ -12,6 +12,7 @@ import { ListUsersComponent } from './containers/list-users-shell/list-users-she
 import { FormAddressComponent } from './components/form-address/form-address.component';
 import { EditUserShellComponent } from './containers/edit-user-shell/edit-user-shell.component';
 import { FormEditUserComponent } from './components/form-edit-user/form-edit-user.component';
+import { SearchUserShellComponent } from './containers/search-user-shell/search-user-shell.component';
 
 @NgModule({
     declarations: [
@@ -22,6 +23,7 @@ import { FormEditUserComponent } from './components/form-edit-user/form-edit-use
         FormAddressComponent,
         EditUserShellComponent,
         FormEditUserComponent,
+        SearchUserShellComponent,
     ],
     imports: [CommonModule, ReactiveFormsModule, MaterialModule, SharedModule],
     exports: [],

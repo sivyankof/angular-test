@@ -1,27 +1,34 @@
 <div class="container">
-    <h2 class="title">first-page</h2>
+    <h2 class="title">Your users:</h2>
 
-    <div class="items">
-        <app-user
-            *ngFor="let user of users; let i = index"
-            id="item"
-            [class.hidden]="!user.activated && !hiddenUsers"
-            [user]="user"
-            [id]="i"
-            (toggleActiveUser)="toggleActiveUser($event)"
-            (log)="log($event)"
-            (openSetting)="openSetting(i)"
-        >
-        </app-user>
+    <div *ngIf="!users.length; else showUsers" class="spinner">
+        <mat-spinner></mat-spinner>
     </div>
 
-    <div class="wrap-btn">
-        <button class="btn-toogle-hide" mat-raised-button color="primary" (click)="toggleHideUsers()">
-            {{ hiddenUsers ? 'Show only active users' : 'Show all users' }}
-        </button>
+    <app-search-user-shell (updateListUsers)="updateListUsers($event)" class="search-input"></app-search-user-shell>
 
-        <button class="btn-active-all-users" mat-stroked-button color="warn" (click)="setActiveAllUsers()">
-            Active all users
-        </button>
-    </div>
+    <ng-template #showUsers>
+        <div class="items">
+            <app-user
+                *ngFor="let user of users; let i = index"
+                id="item"
+                [class.hidden]="!user.activated && !hiddenUsers"
+                [user]="user"
+                [id]="i"
+                (toggleActiveUser)="toggleActiveUser($event)"
+                (openSetting)="openSetting(i)"
+            >
+            </app-user>
+        </div>
+
+        <div class="wrap-btn">
+            <button class="btn-toogle-hide" mat-raised-button color="primary" (click)="toggleHideUsers()">
+                {{ hiddenUsers ? 'Show only active users' : 'Show all users' }}
+            </button>
+
+            <button class="btn-active-all-users" mat-stroked-button color="warn" (click)="setActiveAllUsers()">
+                Active all users
+            </button>
+        </div>
+    </ng-template>
 </div>

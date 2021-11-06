@@ -4,6 +4,7 @@ import { take } from 'rxjs/operators';
 import { User } from 'src/app/shared-module/interface/user.interface';
 import { UsersService } from 'src/app/shared-module/service/users.service';
 import { UserComponent } from 'src/app/shared-module/components/user/user.component';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'Users',
@@ -18,7 +19,7 @@ export class ListUsersComponent implements OnInit {
 
     @ViewChildren(UserComponent) userComponent: QueryList<UserComponent>;
 
-    constructor(public usersService: UsersService) {}
+    constructor(public usersService: UsersService, private router: Router) {}
 
     ngOnInit(): void {
         this.usersService
@@ -55,5 +56,9 @@ export class ListUsersComponent implements OnInit {
 
     setActiveAllUsers() {
         this.userComponent.forEach((user) => user.setActivateUser());
+    }
+
+    openSetting(id: number) {
+        this.router.navigate(['edit-user', id]);
     }
 }

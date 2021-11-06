@@ -8,7 +8,7 @@ import { EditUserShellComponent } from './features/users/containers/edit-user-sh
 const routes: Routes = [
     { path: '', component: ListUsersComponent },
     { path: 'create-user', component: CreateNewUserShellComponent },
-    { path: 'edit-user', component: EditUserShellComponent },
+    { path: 'edit-user/:id', component: EditUserShellComponent },
 ];
 
 @NgModule({

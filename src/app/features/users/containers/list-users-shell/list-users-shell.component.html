@@ -3,12 +3,14 @@
 
     <div class="items">
         <app-user
-            *ngFor="let user of users"
+            *ngFor="let user of users; let i = index"
             id="item"
             [class.hidden]="!user.activated && !hiddenUsers"
             [user]="user"
+            [id]="i"
             (toggleActiveUser)="toggleActiveUser($event)"
             (log)="log($event)"
+            (openSetting)="openSetting(i)"
         >
         </app-user>
     </div>

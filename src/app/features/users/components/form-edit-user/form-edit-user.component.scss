@@ -5,15 +5,16 @@
     margin: 0 auto;
     min-width: 400px;
     padding: 2rem;
-    background-color: rgb(31, 31, 31);
+    background-color: whitesmoke;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 
-    .title-edit {
-        color: whitesmoke;
+    .radio-btn {
+        margin-right: 20px;
     }
 
-    .radio-btn {
-        color: whitesmoke;
-        margin-right: 20px;
+    mat-spinner {
+        position: absolute;
+        right: 0;
+        top: 0;
     }
 }

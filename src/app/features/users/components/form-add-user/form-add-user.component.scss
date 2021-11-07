@@ -33,6 +33,16 @@
     mat-radio-group {
         padding-bottom: 15px;
     }
+
+    mat-spinner {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+
+    .invisible {
+        display: none;
+    }
 }
 
 ::ng-deep mat-tab-group {

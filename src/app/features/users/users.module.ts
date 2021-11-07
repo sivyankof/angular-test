@@ -11,7 +11,6 @@ import { ErrorValidatorComponent } from './components/error-validator/error-vali
 import { ListUsersComponent } from './containers/list-users-shell/list-users-shell.component';
 import { FormAddressComponent } from './components/form-address/form-address.component';
 import { EditUserShellComponent } from './containers/edit-user-shell/edit-user-shell.component';
-import { FormEditUserComponent } from './components/form-edit-user/form-edit-user.component';
 import { SearchUserShellComponent } from './containers/search-user-shell/search-user-shell.component';
 
 @NgModule({
@@ -22,7 +21,6 @@ import { SearchUserShellComponent } from './containers/search-user-shell/search-
         ListUsersComponent,
         FormAddressComponent,
         EditUserShellComponent,
-        FormEditUserComponent,
         SearchUserShellComponent,
     ],
     imports: [CommonModule, ReactiveFormsModule, MaterialModule, SharedModule],

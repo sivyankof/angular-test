@@ -1,8 +1,8 @@
-import { newArray } from '@angular/compiler/src/util';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ValidationErrors, Validators, FormArray } from '@angular/forms';
-
-import { Observable } from 'rxjs';
+import { merge, Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
+import { User } from 'src/app/shared-module/interface/user.interface';
 
 import { ValidatorsService } from 'src/app/shared-module/service/validators.service';
 
@@ -12,7 +12,11 @@ import { ValidatorsService } from 'src/app/shared-module/service/validators.serv
     styleUrls: ['./form-add-user.component.scss'],
 })
 export class FormAddUserComponent implements OnInit {
+    @Input() user?: User;
+    public disabledSpinner = false;
     public formCreateUser: FormGroup;
+    private firstNameEmail;
+    private lastNameEmail;
 
     constructor(private validatorsService: ValidatorsService) {}
 
@@ -33,15 +37,61 @@ export class FormAddUserComponent implements OnInit {
             activated: new FormControl(true),
             addresses: new FormArray([]),
         });
+
+        this.timeLoader();
+        this.checkValueName();
     }
 
     addChildForm(formAddresses: FormGroup) {
         (this.formCreateUser.get('addresses') as FormArray).push(formAddresses);
     }
 
-    public saveUser() {
-        console.log(this.formCreateUser);
+    saveUser() {
         return this.formCreateUser;
+    }
+
+    private checkValueName() {
+        merge(
+            this.formCreateUser.get('firstName').valueChanges,
+            this.formCreateUser.get('lastName').valueChanges,
+        ).subscribe(() => this.newEmail());
+
+        //ASK??? ---->>>>
+
+        // merge(
+        //     this.formCreateUser.get('firstName').valueChanges.pipe(
+        //         map((value) => {
+        //             return {
+        //                 firstName: value,
+        //             };
+        //         }),
+        //     ),
+        //     this.formCreateUser.get('lastName').valueChanges.pipe(
+        //         map((value) => {
+        //             return {
+        //                 lastName: value,
+        //             };
+        //         }),
+        //     ),
+        // ).subscribe((data) => {
+        //     console.log((data['firstName'] || '') + (data['lastName'] || '') + '@gmail.com');
+        // });
+
+        // this.formCreateUser
+        //     .get('firstName')
+        //     .valueChanges.pipe(
+        //         mergeMap((firstName) =>
+        //             this.formCreateUser.get('lastName').valueChanges.pipe(map((lastName) => firstName + lastName)),
+        //         ),
+        //     )
+        //     .subscribe((data) => console.log(data));
+    }
+
+    private newEmail(): void {
+        const newEmail = `${this.formCreateUser.get('firstName').value}${
+            this.formCreateUser.get('lastName').value
+        }@gmail.com`;
+        this.formCreateUser.get('email').setValue(newEmail);
     }
 
     private emailNameValidator(control: FormControl): { [s: string]: boolean } | null {
@@ -50,5 +100,15 @@ export class FormAddUserComponent implements OnInit {
 
     private repeatEmailValidator(control: FormControl): Observable<ValidationErrors> {
         return this.validatorsService.emailRepeat(control.value);
+    }
+
+    timeLoader() {
+        setTimeout(() => {
+            if (!this.user) this.disabledSpinner = true;
+        }, 3000);
+    }
+
+    ngOnChanges() {
+        if (this.user) this.formCreateUser.patchValue(this.user);
     }
 }

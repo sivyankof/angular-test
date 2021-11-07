@@ -1,10 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { User } from 'src/app/shared-module/interface/user.interface';
 import { UsersService } from 'src/app/shared-module/service/users.service';
+import { FormAddUserComponent } from '../../components/form-add-user/form-add-user.component';
 
 @Component({
     selector: 'app-edit-user-shell',
@@ -15,6 +16,8 @@ export class EditUserShellComponent implements OnInit, OnDestroy {
     private id: number;
     public user: User;
     private destroy$ = new Subject();
+
+    @ViewChild(FormAddUserComponent) childForm: FormAddUserComponent;
 
     constructor(private route: ActivatedRoute, private serviceUser: UsersService, private router: Router) {}
 
@@ -27,9 +30,10 @@ export class EditUserShellComponent implements OnInit, OnDestroy {
             .subscribe((user) => (this.user = user));
     }
 
-    saveUser(value: User) {
+    saveUser() {
+        const form = this.childForm.formCreateUser.value;
         this.serviceUser
-            .updateUser(value, this.id)
+            .updateUser(form, this.id)
             .pipe(takeUntil(this.destroy$))
             .subscribe(() => this.router.navigate(['']));
     }

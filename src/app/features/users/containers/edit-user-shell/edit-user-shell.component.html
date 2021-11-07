@@ -1,3 +1,5 @@
 <div class="container">
-    <app-form-edit-user [user]="user" (saveUser)="saveUser($event)"></app-form-edit-user>
+    <app-form-add-user [user]="user"
+        ><button (click)="saveUser()" mat-raised-button color="warn">Save User</button></app-form-add-user
+    >
 </div>

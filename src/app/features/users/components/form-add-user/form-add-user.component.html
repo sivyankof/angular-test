@@ -4,6 +4,7 @@
             <mat-form-field class="example-full-width" appearance="fill">
                 <mat-label>Name</mat-label>
                 <input matInput formControlName="firstName" />
+                <mat-spinner [class.invisible]="disabledSpinner" *ngIf="!user" [diameter]="25"></mat-spinner>
                 <mat-error>
                     <app-error-validator [control]="formCreateUser.get('firstName')"></app-error-validator>
                 </mat-error>
@@ -12,6 +13,7 @@
             <mat-form-field class="example-full-width" appearance="fill">
                 <mat-label>Last Name</mat-label>
                 <input matInput formControlName="lastName" />
+                <mat-spinner [class.invisible]="disabledSpinner" *ngIf="!user" [diameter]="25"></mat-spinner>
                 <mat-error>
                     <app-error-validator [control]="formCreateUser.get('lastName')"></app-error-validator>
                 </mat-error>
@@ -20,6 +22,7 @@
             <mat-form-field class="example-full-width" appearance="fill">
                 <mat-label>Age</mat-label>
                 <input type="number" matInput formControlName="age" />
+                <mat-spinner [class.invisible]="disabledSpinner" *ngIf="!user" [diameter]="25"></mat-spinner>
                 <mat-error>
                     <app-error-validator [control]="formCreateUser.get('age')"></app-error-validator>
                 </mat-error>
@@ -28,6 +31,7 @@
             <mat-form-field class="example-full-width" appearance="fill">
                 <mat-label>Company</mat-label>
                 <input matInput formControlName="company" />
+                <mat-spinner [class.invisible]="disabledSpinner" *ngIf="!user" [diameter]="25"></mat-spinner>
                 <mat-error>
                     <app-error-validator [control]="formCreateUser.get('company')"></app-error-validator>
                 </mat-error>
@@ -36,6 +40,7 @@
             <mat-form-field class="example-full-width" appearance="fill">
                 <mat-label>Department</mat-label>
                 <input matInput formControlName="department" />
+                <mat-spinner [class.invisible]="disabledSpinner" *ngIf="!user" [diameter]="25"></mat-spinner>
                 <mat-error>
                     <app-error-validator [control]="formCreateUser.get('department')"></app-error-validator>
                 </mat-error>
@@ -44,6 +49,7 @@
             <mat-form-field class="example-full-width" appearance="fill">
                 <mat-label>Email</mat-label>
                 <input matInput formControlName="email" />
+                <mat-spinner [class.invisible]="disabledSpinner" *ngIf="!user" [diameter]="25"></mat-spinner>
                 <mat-error>
                     <app-error-validator [control]="formCreateUser.get('email')"></app-error-validator>
                 </mat-error>
@@ -59,6 +65,8 @@
                 <mat-radio-button value="Man">Man</mat-radio-button>
                 <mat-radio-button value="Woman">Woman</mat-radio-button>
             </mat-radio-group>
+
+            <ng-content></ng-content>
         </div>
     </mat-tab>
 

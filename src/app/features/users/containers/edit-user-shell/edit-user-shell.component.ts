@@ -1,10 +1,13 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FormArray, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { ReplaySubject, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { User } from 'src/app/shared-module/interface/user.interface';
 import { UsersService } from 'src/app/shared-module/service/users.service';
+import { DialogComponent } from '../../components/dialog/dialog.component';
 import { FormAddUserComponent } from '../../components/form-add-user/form-add-user.component';
 
 @Component({
@@ -15,11 +18,17 @@ import { FormAddUserComponent } from '../../components/form-add-user/form-add-us
 export class EditUserShellComponent implements OnInit, OnDestroy {
     private id: number;
     public user: User;
+    public userSaveForm = false;
     private destroy$ = new Subject();
 
     @ViewChild(FormAddUserComponent) childForm: FormAddUserComponent;
 
-    constructor(private route: ActivatedRoute, private serviceUser: UsersService, private router: Router) {}
+    constructor(
+        private route: ActivatedRoute,
+        private serviceUser: UsersService,
+        private router: Router,
+        public dialog: MatDialog,
+    ) {}
 
     ngOnInit(): void {
         this.id = this.route.snapshot.params.id;
@@ -36,10 +45,17 @@ export class EditUserShellComponent implements OnInit, OnDestroy {
             .updateUser(form, this.id)
             .pipe(takeUntil(this.destroy$))
             .subscribe(() => this.router.navigate(['']));
+
+        this.userSaveForm = true;
     }
 
     ngOnDestroy() {
         this.destroy$.next();
         this.destroy$.complete();
+    }
+
+    openDialog() {
+        const dialogRef = this.dialog.open(DialogComponent);
+        return dialogRef.afterClosed();
     }
 }

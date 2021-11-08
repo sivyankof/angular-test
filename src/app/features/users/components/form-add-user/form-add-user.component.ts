@@ -102,7 +102,7 @@ export class FormAddUserComponent implements OnInit {
         return this.validatorsService.emailRepeat(control.value);
     }
 
-    timeLoader() {
+    private timeLoader() {
         setTimeout(() => {
             if (!this.user) this.disabledSpinner = true;
         }, 3000);

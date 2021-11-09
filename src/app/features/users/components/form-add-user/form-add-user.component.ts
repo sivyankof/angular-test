@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ValidationErrors, Validators, FormArray } from '@angular/forms';
-import { merge, Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
-import { User } from 'src/app/shared-module/interface/user.interface';
+import { combineLatest, Observable } from 'rxjs';
+import { skip, startWith } from 'rxjs/operators';
 
+import { User } from 'src/app/shared-module/interface/user.interface';
 import { ValidatorsService } from 'src/app/shared-module/service/validators.service';
 
 @Component({
@@ -15,8 +15,6 @@ export class FormAddUserComponent implements OnInit {
     @Input() user?: User;
     public disabledSpinner = false;
     public formCreateUser: FormGroup;
-    private firstNameEmail;
-    private lastNameEmail;
 
     constructor(private validatorsService: ValidatorsService) {}
 
@@ -51,47 +49,16 @@ export class FormAddUserComponent implements OnInit {
     }
 
     private checkValueName() {
-        merge(
-            this.formCreateUser.get('firstName').valueChanges,
-            this.formCreateUser.get('lastName').valueChanges,
-        ).subscribe(() => this.newEmail());
-
-        //ASK??? ---->>>>
-
-        // merge(
-        //     this.formCreateUser.get('firstName').valueChanges.pipe(
-        //         map((value) => {
-        //             return {
-        //                 firstName: value,
-        //             };
-        //         }),
-        //     ),
-        //     this.formCreateUser.get('lastName').valueChanges.pipe(
-        //         map((value) => {
-        //             return {
-        //                 lastName: value,
-        //             };
-        //         }),
-        //     ),
-        // ).subscribe((data) => {
-        //     console.log((data['firstName'] || '') + (data['lastName'] || '') + '@gmail.com');
-        // });
-
-        // this.formCreateUser
-        //     .get('firstName')
-        //     .valueChanges.pipe(
-        //         mergeMap((firstName) =>
-        //             this.formCreateUser.get('lastName').valueChanges.pipe(map((lastName) => firstName + lastName)),
-        //         ),
-        //     )
-        //     .subscribe((data) => console.log(data));
-    }
-
-    private newEmail(): void {
-        const newEmail = `${this.formCreateUser.get('firstName').value}${
-            this.formCreateUser.get('lastName').value
-        }@gmail.com`;
-        this.formCreateUser.get('email').setValue(newEmail);
+        combineLatest([
+            this.formCreateUser
+                .get('firstName')
+                .valueChanges.pipe(startWith(this.formCreateUser.get('firstName').value)),
+            this.formCreateUser.get('lastName').valueChanges.pipe(startWith(this.formCreateUser.get('lastName').value)),
+        ])
+            .pipe(skip(2))
+            .subscribe(([name, surname]) => {
+                this.formCreateUser.get('email').setValue(`${name + surname + '@gmail.com'}`);
+            });
     }
 
     private emailNameValidator(control: FormControl): { [s: string]: boolean } | null {
@@ -105,7 +72,7 @@ export class FormAddUserComponent implements OnInit {
     private timeLoader() {
         setTimeout(() => {
             if (!this.user) this.disabledSpinner = true;
-        }, 3000);
+        }, 2000);
     }
 
     ngOnChanges() {

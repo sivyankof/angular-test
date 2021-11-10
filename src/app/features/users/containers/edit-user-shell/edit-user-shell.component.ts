@@ -15,8 +15,8 @@ import { FormAddUserComponent } from '../../components/form-add-user/form-add-us
     styleUrls: ['./edit-user-shell.component.scss'],
 })
 export class EditUserShellComponent implements OnInit, OnDestroy {
-    private id: number;
-    public user: User;
+    private id: string;
+    public user: any;
     public userSaveForm = false;
     private destroy$ = new Subject();
 
@@ -34,7 +34,7 @@ export class EditUserShellComponent implements OnInit, OnDestroy {
         this.serviceUser
             .getOneUser(this.id)
             .pipe(takeUntil(this.destroy$))
-            .subscribe((user) => (this.user = user));
+            .subscribe((user) => ((this.user = user), console.log(this.user)));
     }
 
     saveUser() {

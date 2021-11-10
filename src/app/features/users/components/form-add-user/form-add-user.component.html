@@ -2,6 +2,15 @@
     <mat-tab label="User info" class="label">
         <div class="form-new-user" [formGroup]="formCreateUser">
             <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Login</mat-label>
+                <input matInput formControlName="login" />
+                <mat-spinner [class.invisible]="disabledSpinner" *ngIf="!user" [diameter]="25"></mat-spinner>
+                <mat-error>
+                    <app-error-validator [control]="formCreateUser.get('login')"></app-error-validator>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width" appearance="fill">
                 <mat-label>Name</mat-label>
                 <input matInput formControlName="firstName" />
                 <mat-spinner [class.invisible]="disabledSpinner" *ngIf="!user" [diameter]="25"></mat-spinner>

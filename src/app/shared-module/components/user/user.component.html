@@ -1,10 +1,10 @@
 <mat-card id="item" [ngClass]="{ 'non-active': !user.activated }">
-    <mat-card-title class="title"><mat-icon>person</mat-icon> {{ user.firstName }}</mat-card-title>
+    <mat-card-title class="title"><img mat-card-avatar src="{{ user.avatar_url }}" /> {{ user.login }}</mat-card-title>
 
     <mat-card-content>
-        <span>age: {{ user.age }}</span
-        ><br />
-        <span>email: {{ user.email }}</span>
+        <p>His repo: <a href="{{ user.html_url }}">repos</a></p>
+        <p>Age: {{ user.age ? user.age : 'none' }}</p>
+        <p>Email: {{ user.email ? user.email : 'none' }}</p>
     </mat-card-content>
 
     <span class="error" *ngIf="errorMes">The user is not old</span>

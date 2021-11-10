@@ -1,10 +1,11 @@
 .container {
     background-color: bisque;
-    height: 100%;
+    height: min-content;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    padding: 5rem 0;
 }
 
 .spinner {

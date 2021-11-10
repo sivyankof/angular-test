@@ -20,6 +20,7 @@ export class FormAddUserComponent implements OnInit {
 
     ngOnInit(): void {
         this.formCreateUser = new FormGroup({
+            login: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]), 
             firstName: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
             lastName: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
             age: new FormControl('', [Validators.min(15), Validators.max(100), Validators.required]),
@@ -29,7 +30,7 @@ export class FormAddUserComponent implements OnInit {
             gender: new FormControl('Man', Validators.required),
             email: new FormControl(
                 '',
-                [Validators.required, Validators.email, this.emailNameValidator.bind(this)],
+                [Validators.required, Validators.email, () => this.emailNameValidator],
                 [this.repeatEmailValidator.bind(this)],
             ),
             activated: new FormControl(true),

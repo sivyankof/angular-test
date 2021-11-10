@@ -16,6 +16,7 @@ export class ListUsersComponent implements OnInit {
     public users: User[] = [];
     public hiddenUsers: boolean = true;
     public allUserActive: User[];
+    private countPage = 1;
 
     @ViewChildren(UserComponent) userComponent: QueryList<UserComponent>;
 
@@ -23,13 +24,22 @@ export class ListUsersComponent implements OnInit {
 
     ngOnInit(): void {
         this.usersService
-            .getUsers()
+            .getUsers(this.countPage)
             .pipe(take(1))
             .subscribe(
-                (date: User[]) => (this.users = date),
+                (date: User[]) => ((this.users = date), (this.countPage += 1), console.log(this.users)),
                 (err: any) => (this.users = []),
-            ),
-            this.findActiveUsers();
+            );
+
+        this.findActiveUsers();
+    }
+
+    onShowMoreUser() {
+        this.usersService
+            .getUsers(this.countPage)
+            .pipe(take(1))
+            .subscribe((date: User[]) => ((this.users = date), (this.countPage += 1), console.log(this.users)));
+        
     }
 
     updateListUsers(data: User[]) {

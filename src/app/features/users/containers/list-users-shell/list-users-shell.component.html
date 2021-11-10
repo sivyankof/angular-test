@@ -16,13 +16,13 @@
                 [user]="user"
                 [id]="i"
                 (toggleActiveUser)="toggleActiveUser($event)"
-                (openSetting)="openSetting(i)"
+                (openSetting)="openSetting(user.login)"
             >
             </app-user>
         </div>
 
         <div class="wrap-btn">
-            <button class="btn-toogle-hide" mat-raised-button color="primary" (click)="toggleHideUsers()">
+            <button class="btn-toogle-hide" mat-stroked-button color="primary" (click)="toggleHideUsers()">
                 {{ hiddenUsers ? 'Show only active users' : 'Show all users' }}
             </button>
 
@@ -30,5 +30,8 @@
                 Active all users
             </button>
         </div>
+        <button class="btn-show-users" mat-raised-button color="primary" (click)="onShowMoreUser()">
+            Show more users
+        </button>
     </ng-template>
 </div>

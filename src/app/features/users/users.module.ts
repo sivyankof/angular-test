@@ -14,6 +14,7 @@ import { EditUserShellComponent } from './containers/edit-user-shell/edit-user-s
 import { SearchUserShellComponent } from './containers/search-user-shell/search-user-shell.component';
 import { ExitEditGuard } from './containers/exit-edit.guard';
 import { DialogComponent } from './components/dialog/dialog.component';
+import { UsersRoutingModule } from './users-routing.module';
 
 @NgModule({
     declarations: [
@@ -26,7 +27,7 @@ import { DialogComponent } from './components/dialog/dialog.component';
         SearchUserShellComponent,
         DialogComponent,
     ],
-    imports: [CommonModule, ReactiveFormsModule, MaterialModule, SharedModule],
+    imports: [CommonModule, ReactiveFormsModule, MaterialModule, SharedModule, UsersRoutingModule],
     exports: [],
     providers: [ExitEditGuard],
 })

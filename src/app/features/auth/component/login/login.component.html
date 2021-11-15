@@ -1,17 +1,26 @@
 <div class="wrap">
-    <div class="form">
+    <div class="form" [formGroup]="loginForm">
         <h2>Login</h2>
+
+        <mat-error>{{ errorLogin }}</mat-error>
+
         <mat-form-field class="login" appearance="fill">
             <mat-label>Login</mat-label>
-            <input matInput placeholder="Enter login" />
+            <input matInput placeholder="Enter login" formControlName="login" />
+            <mat-error *ngIf="loginForm.get('login').hasError('required')">Login is required</mat-error>
+            <mat-error *ngIf="loginForm.get('login').hasError('maxlength')">Login max length is 20</mat-error>
+            <mat-error *ngIf="loginForm.get('login').hasError('minlength')">Login max length is 3</mat-error>
         </mat-form-field>
 
         <mat-form-field class="password" appearance="fill">
             <mat-label>Password</mat-label>
-            <input matInput placeholder="Enter password" />
+            <input type="password" matInput placeholder="Enter password" formControlName="password" />
+            <mat-error *ngIf="loginForm.get('login').hasError('required')">Login is required</mat-error>
+            <mat-error *ngIf="loginForm.get('login').hasError('maxlength')">Login max length is 20</mat-error>
+            <mat-error *ngIf="loginForm.get('login').hasError('minlength')">Login max length is 3</mat-error>
         </mat-form-field>
-
-        <button mat-raised-button color="primary">Log in</button>
+        <br />
+        <ng-content></ng-content>
         <br />
         <a routerLink="/auth/registration">Registration</a>
     </div>

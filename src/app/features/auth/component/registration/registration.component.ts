@@ -8,6 +8,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class RegistrationComponent implements OnInit {
     public newUserForm: FormGroup;
+    public errLogin: '';
+
     constructor() {}
 
     ngOnInit(): void {
@@ -26,9 +28,5 @@ export class RegistrationComponent implements OnInit {
     private confirmPass(control: FormGroup): { [s: string]: boolean } | null {
         const valid = control.value.password === control.value.confirmPassword;
         return valid ? null : { pass: true };
-    }
-
-    reg() {
-        this.newUserForm.markAllAsTouched();
     }
 }

@@ -3,6 +3,7 @@ export interface User {
     age: number;
     activated: boolean;
     login?: string;
+    password?: string;
     email?: string;
     avatar_url?: string;
     repos_url?: string;

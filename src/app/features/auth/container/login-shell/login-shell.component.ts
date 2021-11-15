@@ -35,4 +35,10 @@ export class LoginShellComponent implements OnInit {
                 },
             );
     }
+
+    onKeypressEvent(event: any) {
+        if (event.code === 'Enter') {
+            this.login();
+        }
+    }
 }

@@ -19,6 +19,7 @@ export class ErrorValidatorComponent implements OnInit, DoCheck {
         email: () => `In email need "@"`,
         mailName: () => `Mail must include "@gmail" and "."`,
         doubleEmail: () => `Such Mail already exists`,
+        confirmPass: () => `Your confirm password mistake`,
     };
 
     constructor() {}
@@ -27,7 +28,6 @@ export class ErrorValidatorComponent implements OnInit, DoCheck {
 
     ngDoCheck() {
         let typeErr = this.control.errors;
-
         for (const err in typeErr) {
             this.errorMessage = this.message[err]();
         }

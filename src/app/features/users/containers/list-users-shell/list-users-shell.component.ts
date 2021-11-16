@@ -27,8 +27,11 @@ export class ListUsersComponent implements OnInit {
             .getUsers(this.countPage)
             .pipe(take(1))
             .subscribe(
-                (date: User[]) => ((this.users = date), (this.countPage += 1), console.log(this.users)),
-                (err: any) => (this.users = []),
+                (date: User[]) => ((this.users = date), (this.countPage += 1)),
+                (err: any) => {
+                    this.users = [];
+                    console.log(err);
+                },
             );
 
         this.findActiveUsers();
@@ -38,8 +41,7 @@ export class ListUsersComponent implements OnInit {
         this.usersService
             .getUsers(this.countPage)
             .pipe(take(1))
-            .subscribe((date: User[]) => ((this.users = date), (this.countPage += 1), console.log(this.users)));
-        
+            .subscribe((date: User[]) => ((this.users = date), (this.countPage += 1)));
     }
 
     updateListUsers(data: User[]) {

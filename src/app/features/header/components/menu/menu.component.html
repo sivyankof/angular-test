@@ -1,8 +1,13 @@
 <mat-nav-list class="nav-list">
     <mat-list-item>
-        <a routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">List of users</a>
+        <a routerLink="list-users" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+            >List of users</a
+        >
     </mat-list-item>
     <mat-list-item>
         <a routerLink="create-user" routerLinkActive="active">Create a new user</a>
     </mat-list-item>
 </mat-nav-list>
+<button class="bnt-exit" mat-mini-fab color="warn" (click)="exit()"><mat-icon>exit_to_app</mat-icon></button>
+
+<router-outlet></router-outlet>

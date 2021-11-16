@@ -1,0 +1,20 @@
+.wrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    width: 100vw;
+    height: 100vh;
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .login,
+        .password {
+            width: 270px;
+        }
+    }
+}

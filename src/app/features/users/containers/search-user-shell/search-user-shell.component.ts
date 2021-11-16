@@ -22,7 +22,7 @@ export class SearchUserShellComponent implements OnInit {
     ngOnInit(): void {
         this.mySearch = new FormGroup({ search: new FormControl('') });
 
-        this.userService.getFilterUsers().subscribe((data) => {
+        this.userService.getUsers(100).subscribe((data) => {
             this.users = data;
             this.copyUsers = data;
         });
@@ -35,9 +35,7 @@ export class SearchUserShellComponent implements OnInit {
             .get('search')
             .valueChanges.pipe(debounceTime(500), distinctUntilChanged())
             .subscribe((data) => {
-                this.copyUsers = [
-                    ...this.users.filter((el) => el.firstName.toLowerCase().includes(data.toLowerCase())),
-                ];
+                this.copyUsers = [...this.users.filter((el) => el.login?.toLowerCase().includes(data.toLowerCase()))];
                 this.updateListUsers.emit(this.copyUsers);
             });
     }

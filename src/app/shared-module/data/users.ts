@@ -1,6 +1,7 @@
 import { User } from '../interface/user.interface';
 
 export const users: User[] = [
+    { login: 'admin', password: '123', firstName: 'admin', age: 20, activated: true },
     { firstName: 'Andrei', age: 24, activated: true, email: 'qwe@gmail.com' },
     { firstName: 'Igor', age: 18, activated: true, email: 'qe@gmail.com' },
     { firstName: 'Misha', age: 25, activated: true, email: 'qqq@gmail.com' },

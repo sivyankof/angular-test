@@ -1,0 +1,23 @@
+<div class="wrap">
+    <div class="form" [formGroup]="loginForm">
+        <h2>Login</h2>
+
+        <mat-error>{{ errorLogin }}</mat-error>
+
+        <mat-form-field class="login" appearance="fill">
+            <mat-label>Login</mat-label>
+            <input matInput placeholder="Enter login" formControlName="login" />
+            <mat-error><app-error-validator [control]="loginForm.get('login')"></app-error-validator></mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="password" appearance="fill">
+            <mat-label>Password</mat-label>
+            <input type="password" matInput placeholder="Enter password" formControlName="password" />
+            <mat-error><app-error-validator [control]="loginForm.get('password')"></app-error-validator></mat-error>
+        </mat-form-field>
+        <br />
+        <ng-content></ng-content>
+        <br />
+        <a routerLink="/auth/registration">Registration</a>
+    </div>
+</div>

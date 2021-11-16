@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, CanDeactivate, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { EditUserShellComponent } from './edit-user-shell/edit-user-shell.component';
+import { EditUserShellComponent } from 'src/app/features/users/containers/edit-user-shell/edit-user-shell.component';
 
 @Injectable({
     providedIn: 'root',

@@ -5,24 +5,27 @@
         <mat-form-field class="login" appearance="fill">
             <mat-label>Login</mat-label>
             <input matInput placeholder="Enter login" formControlName="login" />
-            <mat-error *ngIf="newUserForm.get('login').invalid">Login is not required</mat-error>
+            <!-- <mat-error *ngIf="newUserForm.get('login').invalid">Login is not required</mat-error> -->
+            <mat-error><app-error-validator [control]="newUserForm.get('login')"></app-error-validator></mat-error>
         </mat-form-field>
 
         <div class="pass" formGroupName="passGroup">
             <mat-form-field class="password" appearance="fill">
                 <mat-label>Password</mat-label>
                 <input type="password" matInput placeholder="Enter password" formControlName="password" />
-                <mat-error *ngIf="newUserForm.get('passGroup').get('password').invalid"
-                    >Password is not required</mat-error
-                >
+                <mat-error
+                    ><app-error-validator [control]="newUserForm.get('passGroup').get('password')"></app-error-validator
+                ></mat-error>
             </mat-form-field>
 
             <mat-form-field class="password" appearance="fill">
                 <mat-label>Confirm password</mat-label>
                 <input type="password" matInput placeholder="Repeat password" formControlName="confirmPassword" />
-                <mat-error *ngIf="newUserForm.get('passGroup').get('confirmPassword').invalid"
-                    >Confirm password is not required</mat-error
-                >
+                <mat-error
+                    ><app-error-validator
+                        [control]="newUserForm.get('passGroup').get('confirmPassword')"
+                    ></app-error-validator
+                ></mat-error>
             </mat-form-field>
         </div>
 

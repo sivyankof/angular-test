@@ -15,7 +15,6 @@ export class RouteChangesService {
     yourPlace(name) {
         switch (true) {
             case name.includes('auth'): // if (x === 'value1')
-                console.log(2);
                 alert('You now on auth page');
                 break;
 

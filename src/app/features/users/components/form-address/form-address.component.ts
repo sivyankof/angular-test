@@ -25,7 +25,7 @@ export class FormAddressComponent implements OnInit, OnDestroy {
             .subscribe(() => this.hasValue());
     }
 
-    public addNewAddress(): any {
+    addNewAddress(): any {
         (this.currentForm.get('addresses') as FormArray).push(
             new FormGroup({
                 address: new FormControl('', Validators.required),

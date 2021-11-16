@@ -2,15 +2,16 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { User } from '../../interface/user.interface';
 
 @Component({
-    selector: 'user',
+    selector: 'app-user',
     templateUrl: './user.component.html',
     styleUrls: ['./user.component.scss'],
 })
 export class UserComponent implements OnInit {
     @Input() user: User;
+    @Input() id: number;
     @Input() hiddenUsers: Boolean;
     @Output() toggleActiveUser: EventEmitter<User> = new EventEmitter();
-    @Output() log: EventEmitter<User> = new EventEmitter();
+    @Output() openSetting: EventEmitter<any> = new EventEmitter();
 
     public errorMes: boolean = false;
 
@@ -18,7 +19,7 @@ export class UserComponent implements OnInit {
 
     ngOnInit(): void {}
 
-    public toggleActivated(user: User) {
+    toggleActivated(user: User) {
         if (user.age <= 18) {
             this.errorMes = true;
             setTimeout(() => (this.errorMes = false), 2000);
@@ -27,11 +28,11 @@ export class UserComponent implements OnInit {
         this.toggleActiveUser.emit(user);
     }
 
-    public showLog() {
-        this.log.emit(this.user);
+    setActivateUser() {
+        this.user.activated = true;
     }
 
-    public setActivateUser() {
-        this.user.activated = true;
+    onSetting() {
+        this.openSetting.emit();
     }
 }

@@ -7,7 +7,8 @@
     <mat-list-item>
         <a routerLink="create-user" routerLinkActive="active">Create a new user</a>
     </mat-list-item>
+
+    <button class="bnt-exit" mat-mini-fab color="warn" (click)="exit()"><mat-icon>exit_to_app</mat-icon></button>
 </mat-nav-list>
-<button class="bnt-exit" mat-mini-fab color="warn" (click)="exit()"><mat-icon>exit_to_app</mat-icon></button>
 
 <router-outlet></router-outlet>

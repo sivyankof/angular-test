@@ -3,3 +3,12 @@ menu {
     padding: 0;
     width: 100%;
 }
+
+.mess {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: brown;
+    color: white;
+    padding: 0.5rem;
+}

@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { AuthGuard } from './shared-module/guards/auth.guard';
+
 const routes: Routes = [
     { path: '', redirectTo: 'auth', pathMatch: 'full' },
     {
@@ -10,6 +12,7 @@ const routes: Routes = [
     {
         path: '',
         loadChildren: () => import('./features/header/header.module').then((m) => m.HeaderModule),
+        canLoad: [AuthGuard],
     },
     {
         path: '**',

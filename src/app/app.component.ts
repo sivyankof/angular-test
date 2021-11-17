@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { RouteChangesService } from './shared-module/service/route-changes.service';
 
 @Component({
@@ -7,5 +9,17 @@ import { RouteChangesService } from './shared-module/service/route-changes.servi
     styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+    public messagePath: string;
+    private routDestroy$ = new Subject();
+
     constructor(private router: RouteChangesService) {}
+
+    ngOnInit() {
+        this.router.errMess.pipe(takeUntil(this.routDestroy$)).subscribe((x) => (this.messagePath = x));
+    }
+
+    ngOnDestroy() {
+        this.routDestroy$.next();
+        this.routDestroy$.complete();
+    }
 }

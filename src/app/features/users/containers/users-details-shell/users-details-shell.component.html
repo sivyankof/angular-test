@@ -1,0 +1,16 @@
+<div class="wrap">
+    <mat-spinner class="spinner" *ngIf="!user; else showUser"></mat-spinner>
+
+    <ng-template #showUser
+        ><h2 class="title">{{ user | fullName | uppercase }}</h2>
+        <h3 class="time">Time now: {{ date | date: 'HH:mm s' }}</h3>
+
+        <nav mat-tab-nav-bar mat-align-tabs="center">
+            <a mat-tab-link routerLink="personal-info" routerLinkActive="active">Personal info</a>
+            <a mat-tab-link routerLink="company-info" routerLinkActive="active">Company info</a>
+            <a mat-tab-link routerLink="other-info" routerLinkActive="active">Other</a>
+        </nav>
+
+        <router-outlet (activate)="onOutletLoaded($event)"></router-outlet>
+    </ng-template>
+</div>

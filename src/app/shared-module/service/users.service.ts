@@ -11,7 +11,7 @@ import { users } from '../data/users';
 })
 export class UsersService {
     private URL = 'https://api.github.com';
-    // private TOKEN = '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';
+    private TOKEN = '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';
     private user: BehaviorSubject<User> = new BehaviorSubject<User>(null);
     public userObs: Observable<User> = this.user.asObservable();
 
@@ -26,7 +26,7 @@ export class UsersService {
         return this.http.get(this.URL + '/users', {
             headers: {
                 Accept: `application/vnd.github.v3+json`,
-                // authorization: `token ${this.TOKEN}`,
+                authorization: `token ${this.TOKEN}`,
             },
             params: { per_page: countPage * 10 },
         });
@@ -40,10 +40,29 @@ export class UsersService {
         return this.http.get(this.URL + `/users/${id}`, {
             headers: {
                 Accept: `application/vnd.github.v3+json`,
-                // authorization: `token ${this.TOKEN}`,
+                authorization: `token ${this.TOKEN}`,
             },
         });
     }
+
+    getFollower(url: string) {
+        return this.http.get(url, {
+            headers: {
+                Accept: `application/vnd.github.v3+json`,
+                authorization: `token ${this.TOKEN}`,
+            },
+        });
+    }
+    getRepos(url: string) {
+        return this.http.get(url, {
+            headers: {
+                Accept: `application/vnd.github.v3+json`,
+                authorization: `token ${this.TOKEN}`,
+            },
+        });
+    }
+
+  
 
     addNewUser(value: any): Observable<any> {
         users.push(value);

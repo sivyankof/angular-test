@@ -1,0 +1,11 @@
+<ul class="list-other">
+    <li *ngFor="let rep of repos | async; let i = index">
+        <span
+            >{{ i + 1 }}. URL: <a href="{{ rep.html_url }}" target="_blank">{{ rep.name }}</a></span
+        >
+        <br />
+        <span>Create: {{ rep.created_at | date }}</span>
+        <br />
+        <span>Description: {{ rep.description }}</span>
+    </li>
+</ul>

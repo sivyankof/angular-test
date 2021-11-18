@@ -16,6 +16,11 @@ import { DialogComponent } from './components/dialog/dialog.component';
 import { UsersRoutingModule } from './users-routing.module';
 import { ExitEditGuard } from 'src/app/shared-module/guards/exit-edit.guard';
 import { CanLoadGuard } from 'src/app/shared-module/guards/can-load.guard';
+import { UsersDetailsShellComponent } from './containers/users-details-shell/users-details-shell.component';
+import { FullNamePipe } from 'src/app/shared-module/pipe/full-name.pipe';
+import { PersonalInfoComponent } from './components/personal-info/personal-info.component';
+import { CompanyInfoComponent } from './components/company-info/company-info.component';
+import { OtherInfoComponent } from './components/other-info/other-info.component';
 
 
 @NgModule({
@@ -27,8 +32,20 @@ import { CanLoadGuard } from 'src/app/shared-module/guards/can-load.guard';
         EditUserShellComponent,
         SearchUserShellComponent,
         DialogComponent,
+        UsersDetailsShellComponent,
+        FullNamePipe,
+        PersonalInfoComponent,
+        CompanyInfoComponent,
+        OtherInfoComponent,
+
     ],
-    imports: [CommonModule, ReactiveFormsModule, MaterialModule, SharedModule, UsersRoutingModule],
+    imports: [
+        CommonModule, 
+        ReactiveFormsModule, 
+        MaterialModule, 
+        SharedModule, 
+        UsersRoutingModule,
+    ],
     exports: [],
     providers: [ExitEditGuard, CanLoadGuard],
 })

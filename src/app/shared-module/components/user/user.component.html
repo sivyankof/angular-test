@@ -13,6 +13,10 @@
         {{ user.activated ? 'Non-Active' : 'Active' }}
     </button>
 
+    <button routerLink="details" mat-stroked-button color="warn" class="details" (click)="onDetails()">
+        <mat-icon class="icon">person_outline</mat-icon>
+    </button>
+
     <button mat-flat-button color="warn" class="setting-btn" (click)="onSetting()">
         <mat-icon class="icon">settings</mat-icon>
     </button>

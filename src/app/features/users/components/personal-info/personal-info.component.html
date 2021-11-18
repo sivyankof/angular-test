@@ -1,0 +1,24 @@
+<div class="user-info">
+    <p class="name">Name: {{ user.name }}</p>
+    <img class="photo" src="{{ user.avatar_url }}" alt="user photo" />
+    <p>BIO: {{ user.bio }}</p>
+    <p>
+        Site: <a target="_blank" href="{{ user.blog }}">{{ user.blog }}</a>
+    </p>
+    <p>Date creating: {{ user.created_at | date: 'fullDate' }}</p>
+    <p>Date update: {{ user.updated_at | date: 'fullDate' }}</p>
+    <button mat-stroked-button (click)="onHideFollower = !onHideFollower">
+        Followers {{ onHideFollower === true ? 'hide' : 'show' }} ({{ user.following }}):
+    </button>
+    <ul>
+        <div *ngIf="onHideFollower">
+            <li *ngFor="let el of followers | async" class="follower">
+                <p>Name: {{ el.login }}</p>
+                <img class="photo-follower" src="{{ el.avatar_url }}" alt="user photo" />
+                <p>
+                    GitHub: <a target="_blank" href="{{ el.html_url }}">{{ el.html_url }}</a>
+                </p>
+            </li>
+        </div>
+    </ul>
+</div>

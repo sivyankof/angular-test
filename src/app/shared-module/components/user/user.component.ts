@@ -1,4 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { User } from '../../interface/user.interface';
 
 @Component({
@@ -15,7 +17,7 @@ export class UserComponent implements OnInit {
 
     public errorMes: boolean = false;
 
-    constructor() {}
+    constructor(private route: Router) {}
 
     ngOnInit(): void {}
 
@@ -34,5 +36,9 @@ export class UserComponent implements OnInit {
 
     onSetting() {
         this.openSetting.emit();
+    }
+
+    onDetails() {
+        this.route.navigate(['details', `${this.user.login}`]);
     }
 }

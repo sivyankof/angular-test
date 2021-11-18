@@ -1,0 +1,28 @@
+.user-info {
+    width: max-content;
+    margin: 0 auto;
+    padding: 2rem 10rem;
+
+    .photo {
+        border-radius: 40px;
+        width: 100px;
+    }
+
+    button {
+        margin-bottom: 20px;
+    }
+
+    .follower {
+        list-style: none;
+        border: 1px solid rgba(0, 0, 0, 0.26);
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 10px;
+        background-color: mintcream;
+
+        .photo-follower {
+            width: 50px;
+            border-radius: 50px;
+        }
+    }
+}

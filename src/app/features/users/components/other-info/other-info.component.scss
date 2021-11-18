@@ -1,0 +1,11 @@
+.list-other {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    list-style: none;
+
+    li {
+        padding-left: 2rem;
+        margin-bottom: 10px;
+    }
+}

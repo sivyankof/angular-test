@@ -22,16 +22,22 @@ export class RouteChangesService {
     yourPlace(name: any) {
         switch (true) {
             case name.includes('auth'):
-                return 'You now on auth page';
+                return 'You now on "auth" page';
 
             case name.includes('list'):
-                return 'You now on list users page';
+                return 'You now on "list users" page';
 
             case name.includes('edit'):
-                return 'You now on edit user page';
+                return 'You now on "edit user" page';
 
             case name.includes('create'):
-                return 'You now on create user page';
+                return 'You now on "create user" page';
+
+            case name.includes('details'):
+                return 'You now on "user details" page';
+
+            case name.includes('table'):
+                return 'You now on "table" page';
 
             default:
                 return 'page not found';

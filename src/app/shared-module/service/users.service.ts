@@ -1,7 +1,8 @@
+import { TOUCH_BUFFER_MS } from '@angular/cdk/a11y/input-modality/input-modality-detector';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { delay, map } from 'rxjs/operators';
 
 import { User } from 'src/app/shared-module/interface/user.interface';
 import { users } from '../data/users';
@@ -62,10 +63,20 @@ export class UsersService {
         });
     }
 
-  
-
     addNewUser(value: any): Observable<any> {
         users.push(value);
         return of(value).pipe(delay(1000));
+    }
+
+    getOtherUsers() {
+        return this.http.get('https://randomuser.me/api/?results=100').pipe(
+            map((obj: any) => {
+                const data = obj.results;
+                return data.map((user, i) => {
+                    user.id = i + 1;
+                    return user;
+                });
+            }),
+        );
     }
 }

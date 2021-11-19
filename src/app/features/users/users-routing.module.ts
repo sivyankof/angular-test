@@ -10,6 +10,8 @@ import { ListUsersComponent } from './containers/list-users-shell/list-users-she
 import { PersonalInfoComponent } from './components/personal-info/personal-info.component';
 import { CompanyInfoComponent } from './components/company-info/company-info.component';
 import { OtherInfoComponent } from './components/other-info/other-info.component';
+import { TableClientShellComponent } from './containers/table-client-shell/table-client-shell.component';
+import { TableServerShellComponent } from './containers/table-server-shell/table-server-shell.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'list-users', pathMatch: 'full' },
@@ -30,6 +32,8 @@ const routes: Routes = [
             { path: 'other-info', component: OtherInfoComponent },
         ],
     },
+    { path: 'table-client', component: TableClientShellComponent },
+    { path: 'table-server', component: TableServerShellComponent },
 ];
 
 @NgModule({

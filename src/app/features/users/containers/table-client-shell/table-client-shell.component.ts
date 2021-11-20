@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort, Sort } from '@angular/material/sort';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { take } from 'rxjs/operators';
 
@@ -12,7 +12,7 @@ import { UsersService } from 'src/app/shared-module/service/users.service';
     styleUrls: ['./table-client-shell.component.scss'],
 })
 export class TableClientShellComponent implements OnInit {
-    public displayedColumns: string[] = ['position', 'img', 'name', 'dob', 'location', 'email'];
+    public displayedColumns: string[] = ['id', 'picture', 'name', 'dob', 'location', 'email'];
     public listUsers: MatTableDataSource<any>;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -28,8 +28,6 @@ export class TableClientShellComponent implements OnInit {
                 this.listUsers = new MatTableDataSource(data);
                 this.listUsers.paginator = this.paginator;
                 this.listUsers.sort = this.sort;
-
-                console.log(this.sort.direction);
             });
     }
 }

@@ -1,4 +1,3 @@
-import { TOUCH_BUFFER_MS } from '@angular/cdk/a11y/input-modality/input-modality-detector';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
@@ -6,6 +5,37 @@ import { delay, map } from 'rxjs/operators';
 
 import { User } from 'src/app/shared-module/interface/user.interface';
 import { users } from '../data/users';
+interface UserTable {
+    id: number;
+    age: string;
+    dob: string;
+    email: string;
+    picture: string;
+    name: string;
+    location: string;
+    address: string;
+}
+
+interface getUser {
+    id: string;
+    dob: { age: string; date: string };
+    email: string;
+    picture: { thumbnail: string };
+    name: {
+        title: string;
+        first: string;
+        last: string;
+    };
+    location: {
+        city: string;
+        state: string;
+        country: string;
+        street: {
+            name: string;
+            number: string;
+        };
+    };
+}
 
 @Injectable({
     providedIn: 'root',
@@ -27,7 +57,7 @@ export class UsersService {
         return this.http.get(this.URL + '/users', {
             headers: {
                 Accept: `application/vnd.github.v3+json`,
-                authorization: `token ${this.TOKEN}`,
+                // authorization: `token ${this.TOKEN}`,
             },
             params: { per_page: countPage * 10 },
         });
@@ -41,7 +71,7 @@ export class UsersService {
         return this.http.get(this.URL + `/users/${id}`, {
             headers: {
                 Accept: `application/vnd.github.v3+json`,
-                authorization: `token ${this.TOKEN}`,
+                // authorization: `token ${this.TOKEN}`,
             },
         });
     }
@@ -50,7 +80,7 @@ export class UsersService {
         return this.http.get(url, {
             headers: {
                 Accept: `application/vnd.github.v3+json`,
-                authorization: `token ${this.TOKEN}`,
+                // authorization: `token ${this.TOKEN}`,
             },
         });
     }
@@ -58,7 +88,7 @@ export class UsersService {
         return this.http.get(url, {
             headers: {
                 Accept: `application/vnd.github.v3+json`,
-                authorization: `token ${this.TOKEN}`,
+                // authorization: `token ${this.TOKEN}`,
             },
         });
     }
@@ -68,14 +98,20 @@ export class UsersService {
         return of(value).pipe(delay(1000));
     }
 
-    getOtherUsers() {
+    getOtherUsers(): Observable<UserTable[]> {
         return this.http.get('https://randomuser.me/api/?results=100').pipe(
             map((obj: any) => {
                 const data = obj.results;
-                return data.map((user, i) => {
-                    user.id = i + 1;
-                    return user;
-                });
+                return data.map((user: getUser, i: number) => ({
+                    id: i + 1,
+                    age: user.dob.age,
+                    dob: user.dob.date,
+                    email: user.email,
+                    picture: user.picture.thumbnail,
+                    name: user.name.title + `.` + user.name.first + ` ` + user.name.last,
+                    location: user.location.city + ', ' + user.location.state + ', ' + user.location.country,
+                    address: user.location.street.name + ', ' + user.location.street.number,
+                }));
             }),
         );
     }

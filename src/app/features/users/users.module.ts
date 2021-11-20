@@ -23,8 +23,6 @@ import { CompanyInfoComponent } from './components/company-info/company-info.com
 import { OtherInfoComponent } from './components/other-info/other-info.component';
 import { TableClientShellComponent } from './containers/table-client-shell/table-client-shell.component';
 import { TableServerShellComponent } from './containers/table-server-shell/table-server-shell.component';
-import { FullNameUserTablePipe } from 'src/app/shared-module/pipe/full-name-user-table.pipe';
-import { LocationPipePipe } from 'src/app/shared-module/pipe/location-pipe.pipe';
 
 @NgModule({
     declarations: [
@@ -42,8 +40,6 @@ import { LocationPipePipe } from 'src/app/shared-module/pipe/location-pipe.pipe'
         OtherInfoComponent,
         TableClientShellComponent,
         TableServerShellComponent,
-        FullNameUserTablePipe,
-        LocationPipePipe,
     ],
     imports: [CommonModule, ReactiveFormsModule, MaterialModule, SharedModule, UsersRoutingModule],
     exports: [],

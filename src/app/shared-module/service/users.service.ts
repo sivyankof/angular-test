@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { SortDirection } from '@angular/material/sort';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
 
@@ -101,8 +102,7 @@ export class UsersService {
     getOtherUsers(): Observable<UserTable[]> {
         return this.http.get('https://randomuser.me/api/?results=100').pipe(
             map((obj: any) => {
-                const data = obj.results;
-                return data.map((user: getUser, i: number) => ({
+                return obj.results.map((user: getUser, i: number) => ({
                     id: i + 1,
                     age: user.dob.age,
                     dob: user.dob.date,
@@ -114,5 +114,39 @@ export class UsersService {
                 }));
             }),
         );
+    }
+
+    getRepoIssues(sort: string, order: SortDirection, page: number): Observable<any> {
+        return this.http.get('https://randomuser.me/api/?results=100').pipe(
+            map((obj: any) => {
+                return obj.results.map((user: getUser, i: number) => ({
+                    id: i + 1,
+                    age: user.dob.age,
+                    dob: user.dob.date,
+                    email: user.email,
+                    picture: user.picture.thumbnail,
+                    name: user.name.title + `.` + user.name.first + ` ` + user.name.last,
+                    location: user.location.city + ', ' + user.location.state + ', ' + user.location.country,
+                    address: user.location.street.name + ', ' + user.location.street.number,
+                }));
+            }),
+            map((users) => this.mySort(users, sort, order)),
+        );
+    }
+
+    mySort(arr: UserTable[], sortName: string, order: string) {
+        return arr.sort((a, b) => {
+            if (order === 'asc') {
+                if (a[sortName] > b[sortName]) return 1;
+                if (a[sortName] < b[sortName]) return -1;
+                return 0;
+            } else if (order == 'desc') {
+                if (a[sortName] < b[sortName]) return 1;
+                if (a[sortName] > b[sortName]) return -1;
+                return 0;
+            } else {
+                return 0;
+            }
+        });
     }
 }

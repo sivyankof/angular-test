@@ -13,7 +13,12 @@
     </mat-list-item>
 
     <mat-list-item>
-        <a routerLink="table-server" routerLinkActive="active">Table server</a>
+        <a
+            [routerLink]="['table-server']"
+            [queryParams]="{ page: '1', sortName: '', directionSort: '' }"
+            routerLinkActive="active"
+            >Table server</a
+        >
     </mat-list-item>
 
     <button class="bnt-exit" mat-mini-fab color="warn" (click)="exit()"><mat-icon>exit_to_app</mat-icon></button>

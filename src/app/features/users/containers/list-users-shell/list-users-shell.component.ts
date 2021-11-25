@@ -1,10 +1,11 @@
-import { Component, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { take } from 'rxjs/operators';
+import { Component, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { takeUntil } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 import { User } from 'src/app/shared-module/interface/user.interface';
 import { UsersService } from 'src/app/shared-module/service/users.service';
 import { UserComponent } from 'src/app/shared-module/components/user/user.component';
+import { Subject } from 'rxjs';
 
 @Component({
     selector: 'Users',
@@ -12,20 +13,26 @@ import { UserComponent } from 'src/app/shared-module/components/user/user.compon
     styleUrls: ['./list-users-shell.component.scss'],
     providers: [UsersService],
 })
-export class ListUsersComponent implements OnInit {
+export class ListUsersComponent implements OnInit, OnDestroy {
     public users: User[] = [];
     public hiddenUsers: boolean = true;
     public allUserActive: User[];
     private countPage = 1;
+    private destroy$: Subject<void> = new Subject();
 
     @ViewChildren(UserComponent) userComponent: QueryList<UserComponent>;
 
     constructor(public usersService: UsersService, private router: Router) {}
 
     ngOnInit(): void {
+        this.initGetUsers();
+        this.findActiveUsers();
+    }
+
+    private initGetUsers() {
         this.usersService
             .getUsers(this.countPage)
-            .pipe(take(1))
+            .pipe(takeUntil(this.destroy$))
             .subscribe(
                 (date: User[]) => ((this.users = date), (this.countPage += 1)),
                 (err: any) => {
@@ -33,18 +40,20 @@ export class ListUsersComponent implements OnInit {
                     console.log(err);
                 },
             );
+    }
 
-        this.findActiveUsers();
+    private findActiveUsers() {
+        this.allUserActive = this.users.filter((user) => user.activated);
     }
 
     onShowMoreUser() {
         this.usersService
             .getUsers(this.countPage)
-            .pipe(take(1))
+            .pipe(takeUntil(this.destroy$))
             .subscribe((date: User[]) => ((this.users = date), (this.countPage += 1)));
     }
 
-    updateListUsers(data: User[]) {
+    searchListUsers(data: User[]) {
         this.users = data;
     }
 
@@ -57,15 +66,12 @@ export class ListUsersComponent implements OnInit {
         this.findActiveUsers();
     }
 
-    findActiveUsers() {
-        this.allUserActive = this.users.filter((user) => user.activated);
-    }
-
     setActiveAllUsers() {
         this.userComponent.forEach((user) => user.setActivateUser());
     }
 
-    openSetting(id: number) {
-        this.router.navigate(['edit-user', id]);
+    ngOnDestroy() {
+        this.destroy$.next();
+        this.destroy$.complete();
     }
 }

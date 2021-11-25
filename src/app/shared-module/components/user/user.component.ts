@@ -13,11 +13,10 @@ export class UserComponent implements OnInit {
     @Input() id: number;
     @Input() hiddenUsers: Boolean;
     @Output() toggleActiveUser: EventEmitter<User> = new EventEmitter();
-    @Output() openSetting: EventEmitter<any> = new EventEmitter();
 
     public errorMes: boolean = false;
 
-    constructor(private route: Router) {}
+    constructor(private router: Router) {}
 
     ngOnInit(): void {}
 
@@ -35,10 +34,10 @@ export class UserComponent implements OnInit {
     }
 
     onSetting() {
-        this.openSetting.emit();
+        this.router.navigate(['edit-user', this.user.login]);
     }
 
     onDetails() {
-        this.route.navigate(['details', `${this.user.login}`]);
+        this.router.navigate(['details', this.user.login]);
     }
 }

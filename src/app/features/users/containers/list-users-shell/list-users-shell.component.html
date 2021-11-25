@@ -5,7 +5,7 @@
         <mat-spinner></mat-spinner>
     </div>
 
-    <app-search-user-shell (updateListUsers)="updateListUsers($event)" class="search-input"></app-search-user-shell>
+    <app-search-user-shell (searchListUsers)="searchListUsers($event)" class="search-input"></app-search-user-shell>
 
     <ng-template #showUsers>
         <div class="items">
@@ -16,7 +16,6 @@
                 [user]="user"
                 [id]="i"
                 (toggleActiveUser)="toggleActiveUser($event)"
-                (openSetting)="openSetting(user.login)"
             >
             </app-user>
         </div>

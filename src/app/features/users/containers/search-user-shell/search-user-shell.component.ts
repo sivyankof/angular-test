@@ -1,6 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
 
 import { User } from 'src/app/shared-module/interface/user.interface';
 import { UsersService } from 'src/app/shared-module/service/users.service';
@@ -10,9 +11,10 @@ import { UsersService } from 'src/app/shared-module/service/users.service';
     templateUrl: './search-user-shell.component.html',
     styleUrls: ['./search-user-shell.component.scss'],
 })
-export class SearchUserShellComponent implements OnInit {
-    @Output() updateListUsers = new EventEmitter();
+export class SearchUserShellComponent implements OnInit, OnDestroy {
+    @Output() searchListUsers = new EventEmitter();
 
+    private destroy$: Subject<any> = new Subject();
     public users: User[] = [];
     public copyUsers = [];
     public mySearch: FormGroup;
@@ -33,10 +35,15 @@ export class SearchUserShellComponent implements OnInit {
     findUser() {
         this.mySearch
             .get('search')
-            .valueChanges.pipe(debounceTime(500), distinctUntilChanged())
+            .valueChanges.pipe(takeUntil(this.destroy$), debounceTime(500), distinctUntilChanged())
             .subscribe((data) => {
                 this.copyUsers = [...this.users.filter((el) => el.login?.toLowerCase().includes(data.toLowerCase()))];
-                this.updateListUsers.emit(this.copyUsers);
+                this.searchListUsers.emit(this.copyUsers);
             });
+    }
+
+    ngOnDestroy() {
+        this.destroy$.next();
+        this.destroy$.complete();
     }
 }

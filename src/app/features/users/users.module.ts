@@ -24,6 +24,9 @@ import { OtherInfoComponent } from './components/other-info/other-info.component
 import { TableClientShellComponent } from './containers/table-client-shell/table-client-shell.component';
 import { TableServerShellComponent } from './containers/table-server-shell/table-server-shell.component';
 
+import { StoreModule } from '@ngrx/store';
+import { UserReducer } from './store/reducers/user.reducers';
+
 @NgModule({
     declarations: [
         CreateNewUserShellComponent,
@@ -41,7 +44,14 @@ import { TableServerShellComponent } from './containers/table-server-shell/table
         TableClientShellComponent,
         TableServerShellComponent,
     ],
-    imports: [CommonModule, ReactiveFormsModule, MaterialModule, SharedModule, UsersRoutingModule],
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        MaterialModule,
+        SharedModule,
+        UsersRoutingModule,
+        StoreModule.forRoot({ state: UserReducer }),
+    ],
     exports: [],
     providers: [ExitEditGuard, CanLoadGuard],
 })

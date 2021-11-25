@@ -1,8 +1,8 @@
 <mat-card id="item" [ngClass]="{ 'non-active': !user.activated }">
-    <mat-card-title class="title"><img mat-card-avatar src="{{ user.avatar_url }}" /> {{ user.login }}</mat-card-title>
+    <mat-card-title class="title"><img mat-card-avatar src="{{ user.picture }}" /> {{ user.name }}</mat-card-title>
 
     <mat-card-content>
-        <p>His repo: <a href="{{ user.html_url }}">repos</a></p>
+        <!-- <p>His repo: <a href="{{ user.picture }}">repos</a></p> -->
         <p>Age: {{ user.age ? user.age : 'none' }}</p>
         <p>Email: {{ user.email ? user.email : 'none' }}</p>
     </mat-card-content>

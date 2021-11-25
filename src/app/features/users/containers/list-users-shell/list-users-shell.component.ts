@@ -5,7 +5,11 @@ import { Router } from '@angular/router';
 import { User } from 'src/app/shared-module/interface/user.interface';
 import { UsersService } from 'src/app/shared-module/service/users.service';
 import { UserComponent } from 'src/app/shared-module/components/user/user.component';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { IUserState } from '../../store/interface';
+import { getUsers, loadUsers } from '../../store/actions/user.actions';
+import { selectUser, selectUsers } from '../../store/selectors/user.selector';
 
 @Component({
     selector: 'Users',
@@ -20,13 +24,25 @@ export class ListUsersComponent implements OnInit, OnDestroy {
     private countPage = 1;
     private destroy$: Subject<void> = new Subject();
 
+    public users$: Observable<any>;
+
     @ViewChildren(UserComponent) userComponent: QueryList<UserComponent>;
 
-    constructor(public usersService: UsersService, private router: Router) {}
+    constructor(public usersService: UsersService, private router: Router, private store: Store<IUserState>) {}
 
     ngOnInit(): void {
-        this.initGetUsers();
-        this.findActiveUsers();
+        this.usersService
+            .getOtherUsers()
+            .pipe(takeUntil(this.destroy$))
+            .subscribe((users) => {
+                this.store.dispatch(loadUsers({ users }));
+                this.users$ = this.store.select(selectUsers);
+            });
+
+        
+
+        // this.initGetUsers();
+        // this.findActiveUsers();
     }
 
     private initGetUsers() {

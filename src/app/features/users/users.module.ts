@@ -26,6 +26,8 @@ import { TableServerShellComponent } from './containers/table-server-shell/table
 
 import { StoreModule } from '@ngrx/store';
 import { UserReducer } from './store/reducers/user.reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { UserEffect } from './store/effects/user.effects';
 
 @NgModule({
     declarations: [
@@ -50,7 +52,8 @@ import { UserReducer } from './store/reducers/user.reducers';
         MaterialModule,
         SharedModule,
         UsersRoutingModule,
-        StoreModule.forRoot({ state: UserReducer }),
+        StoreModule.forRoot({ userState: UserReducer }),
+        EffectsModule.forRoot([UserEffect]),
     ],
     exports: [],
     providers: [ExitEditGuard, CanLoadGuard],

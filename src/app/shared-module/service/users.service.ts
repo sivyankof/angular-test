@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { SortDirection } from '@angular/material/sort';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
+import { IUser } from 'src/app/features/users/store/interface';
 
 import { User } from 'src/app/shared-module/interface/user.interface';
 import { users } from '../data/users';
@@ -99,7 +100,7 @@ export class UsersService {
         return of(value).pipe(delay(1000));
     }
 
-    getOtherUsers(): Observable<UserTable[]> {
+    getOtherUsers(): Observable<IUser[]> {
         return this.http.get('https://randomuser.me/api/?results=100').pipe(
             map((obj: any) => {
                 return obj.results.map((user: getUser, i: number) => ({

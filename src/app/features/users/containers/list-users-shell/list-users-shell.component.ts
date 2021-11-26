@@ -31,15 +31,8 @@ export class ListUsersComponent implements OnInit, OnDestroy {
     constructor(public usersService: UsersService, private router: Router, private store: Store<IUserState>) {}
 
     ngOnInit(): void {
-        this.usersService
-            .getOtherUsers()
-            .pipe(takeUntil(this.destroy$))
-            .subscribe((users) => {
-                this.store.dispatch(loadUsers({ users }));
-                this.users$ = this.store.select(selectUsers);
-            });
-
-        
+        this.store.dispatch(loadUsers());
+        this.users$ = this.store.select(selectUsers);
 
         // this.initGetUsers();
         // this.findActiveUsers();

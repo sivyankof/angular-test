@@ -1,5 +1,7 @@
 import { createAction, props } from '@ngrx/store';
+import { IUser } from '../interface';
 
-export const getUsers = createAction('[Users] Get Users');
-export const loadUsers = createAction(`[Users] Load Users`, props<{ users }>());
-// export const getUser = createAction(`[User] Get User`, props<{ id: string }>());
+export const getUsers = createAction('GET_USERS');
+export const getUser = createAction(`[User] Get User`, props<{ id: string }>());
+export const loadUsers = createAction(`LOAD_USER`);
+export const loadUsersSuccess = createAction('LOAD_USERS_SUCCESS', props<{ users: IUser[] }>());

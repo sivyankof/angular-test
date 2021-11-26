@@ -10,4 +10,5 @@ export interface User {
     html_url?: string;
     picture?: string;
     name?: string;
+    id?: string;
 }

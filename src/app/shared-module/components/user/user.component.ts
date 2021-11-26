@@ -34,10 +34,10 @@ export class UserComponent implements OnInit {
     }
 
     onSetting() {
-        this.router.navigate(['edit-user', this.user.login]);
+        this.router.navigate(['edit-user', this.user.id]);
     }
 
     onDetails() {
-        this.router.navigate(['details', this.user.login]);
+        this.router.navigate(['details', this.user.id]);
     }
 }

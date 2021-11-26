@@ -1,13 +1,16 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 import { User } from 'src/app/shared-module/interface/user.interface';
 import { UsersService } from 'src/app/shared-module/service/users.service';
 import { DialogComponent } from '../../components/dialog/dialog.component';
 import { FormAddUserComponent } from '../../components/form-add-user/form-add-user.component';
+import { IUser, IUserState } from '../../store/interface';
+import { selectUser } from '../../store/selectors/user.selector';
 
 @Component({
     selector: 'app-edit-user-shell',
@@ -20,6 +23,8 @@ export class EditUserShellComponent implements OnInit, OnDestroy {
     public userSaveForm = false;
     private destroy$ = new Subject();
 
+    public user$: Observable<IUser>;
+
     @ViewChild(FormAddUserComponent) childForm: FormAddUserComponent;
 
     constructor(
@@ -27,14 +32,20 @@ export class EditUserShellComponent implements OnInit, OnDestroy {
         private serviceUser: UsersService,
         private router: Router,
         public dialog: MatDialog,
+        private store: Store<IUserState>,
     ) {}
 
     ngOnInit(): void {
         this.id = this.route.snapshot.params.id;
-        this.serviceUser
-            .getOneUser(this.id)
-            .pipe(takeUntil(this.destroy$))
-            .subscribe((user) => ((this.user = user), console.log(this.user)));
+        this.user$ = this.store.select(selectUser, this.id );
+
+        console.log(this.user$);
+
+        // this.id = this.route.snapshot.params.id;
+        // this.serviceUser
+        //     .getOneUser(this.id)
+        //     .pipe(takeUntil(this.destroy$))
+        //     .subscribe((user) => ((this.user = user), console.log(this.user)));
     }
 
     saveUser() {

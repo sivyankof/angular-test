@@ -9,8 +9,8 @@ import { User } from 'src/app/shared-module/interface/user.interface';
 import { UsersService } from 'src/app/shared-module/service/users.service';
 import { DialogComponent } from '../../components/dialog/dialog.component';
 import { FormAddUserComponent } from '../../components/form-add-user/form-add-user.component';
-import { IUser, IUserState } from '../../store/interface';
-import { selectUser } from '../../store/selectors/user.selector';
+import { IUserState } from '../../store/user.reducers';
+import { selectUser } from '../../store/user.selector';
 
 @Component({
     selector: 'app-edit-user-shell',
@@ -23,7 +23,7 @@ export class EditUserShellComponent implements OnInit, OnDestroy {
     public userSaveForm = false;
     private destroy$ = new Subject();
 
-    public user$: Observable<IUser>;
+    public user$: Observable<User>;
 
     @ViewChild(FormAddUserComponent) childForm: FormAddUserComponent;
 
@@ -37,7 +37,7 @@ export class EditUserShellComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.id = this.route.snapshot.params.id;
-        this.user$ = this.store.select(selectUser, this.id );
+        this.user$ = this.store.select(selectUser, { props: this.id });
 
         console.log(this.user$);
 

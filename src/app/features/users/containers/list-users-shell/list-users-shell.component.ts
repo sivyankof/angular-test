@@ -1,15 +1,15 @@
 import { Component, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { takeUntil } from 'rxjs/operators';
+import { map, takeUntil } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { Observable, of, Subject } from 'rxjs';
+import { Store } from '@ngrx/store';
 
 import { User } from 'src/app/shared-module/interface/user.interface';
 import { UsersService } from 'src/app/shared-module/service/users.service';
 import { UserComponent } from 'src/app/shared-module/components/user/user.component';
-import { Observable, Subject } from 'rxjs';
-import { Store } from '@ngrx/store';
-import { IUserState } from '../../store/interface';
-import { getUsers, loadUsers } from '../../store/actions/user.actions';
-import { selectUser, selectUsers } from '../../store/selectors/user.selector';
+import { loadNewUsers, loadUsers, setActivateUser, userNonActivate } from '../../store/user.actions';
+import { selectUsers } from '../../store/user.selector';
+import { IUserState } from '../../store/user.reducers';
 
 @Component({
     selector: 'Users',
@@ -23,7 +23,6 @@ export class ListUsersComponent implements OnInit, OnDestroy {
     public allUserActive: User[];
     private countPage = 1;
     private destroy$: Subject<void> = new Subject();
-
     public users$: Observable<any>;
 
     @ViewChildren(UserComponent) userComponent: QueryList<UserComponent>;
@@ -56,10 +55,7 @@ export class ListUsersComponent implements OnInit, OnDestroy {
     }
 
     onShowMoreUser() {
-        this.usersService
-            .getUsers(this.countPage)
-            .pipe(takeUntil(this.destroy$))
-            .subscribe((date: User[]) => ((this.users = date), (this.countPage += 1)));
+        this.store.dispatch(loadNewUsers());
     }
 
     searchListUsers(data: User[]) {
@@ -71,12 +67,12 @@ export class ListUsersComponent implements OnInit, OnDestroy {
     }
 
     toggleActiveUser(user: User): void {
-        user.activated = !user.activated;
-        this.findActiveUsers();
+        this.store.dispatch(userNonActivate({ id: user.id }));
     }
 
     setActiveAllUsers() {
-        this.userComponent.forEach((user) => user.setActivateUser());
+        this.store.dispatch(setActivateUser());
+        this.users$ = this.store.select(selectUsers);
     }
 
     ngOnDestroy() {

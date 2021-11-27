@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { SortDirection } from '@angular/material/sort';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
-import { IUser } from 'src/app/features/users/store/interface';
 
 import { User } from 'src/app/shared-module/interface/user.interface';
 import { users } from '../data/users';
@@ -16,6 +15,7 @@ interface UserTable {
     name: string;
     location: string;
     address: string;
+    activated?: boolean;
 }
 
 interface getUser {
@@ -100,8 +100,8 @@ export class UsersService {
         return of(value).pipe(delay(1000));
     }
 
-    getOtherUsers(): Observable<IUser[]> {
-        return this.http.get('https://randomuser.me/api/?results=100').pipe(
+    getOtherUsers(): Observable<User[]> {
+        return this.http.get('https://randomuser.me/api/?results=10').pipe(
             map((obj: any) => {
                 return obj.results.map((user: getUser, i: number) => ({
                     id: i + 1,
@@ -112,6 +112,7 @@ export class UsersService {
                     name: user.name.title + `.` + user.name.first + ` ` + user.name.last,
                     location: user.location.city + ', ' + user.location.state + ', ' + user.location.country,
                     address: user.location.street.name + ', ' + user.location.street.number,
+                    // activated: false,
                 }));
             }),
         );

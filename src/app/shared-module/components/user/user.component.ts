@@ -1,6 +1,10 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { getUser } from 'src/app/features/users/store/user.actions';
 
+import { IUserState } from 'src/app/features/users/store/user.reducers';
 import { User } from '../../interface/user.interface';
 
 @Component({

@@ -1,7 +1,7 @@
 export interface User {
     firstName: string;
     age: number;
-    activated: boolean;
+    activated?: boolean;
     login?: string;
     password?: string;
     email?: string;

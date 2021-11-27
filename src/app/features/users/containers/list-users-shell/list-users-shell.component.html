@@ -10,7 +10,7 @@
     <ng-template #showUsers>
         <div class="items">
             <app-user
-                *ngFor="let user of (users$ | async); let i = index"
+                *ngFor="let user of users$ | async; let i = index"
                 id="item"
                 [class.hidden]="!user.activated && !hiddenUsers"
                 [user]="user"

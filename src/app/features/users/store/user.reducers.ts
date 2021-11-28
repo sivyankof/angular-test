@@ -5,7 +5,7 @@ import { User } from 'src/app/shared-module/interface/user.interface';
 
 export interface IUserState {
     users: User[];
-    selectedUser?: User;
+    selectedUser: User;
 }
 
 export const initialUserState: IUserState = {
@@ -29,10 +29,7 @@ const reducer = createReducer(
     on(setActivateUser, (state) => {
         return {
             ...state,
-            users: state.users.map((user) => ({
-                ...user,
-                activated: !user.activated,
-            })),
+            users: setActivateAllUsers(state),
         };
     }),
     on(userNonActivate, (state, { id }) => {
@@ -62,4 +59,11 @@ function pushNewUsers(state: IUserState, users: User[], count: number) {
         copy.id = count.toString();
         return copy;
     });
+}
+
+function setActivateAllUsers(state: IUserState) {
+    return state.users.map((user: User) => ({
+        ...user,
+        activated: !user.activated,
+    }));
 }

@@ -21,7 +21,12 @@
         </div>
 
         <div class="wrap-btn">
-            <button class="btn-toogle-hide" mat-stroked-button color="primary" (click)="toggleHideUsers()">
+            <button
+                class="btn-toogle-hide"
+                mat-stroked-button
+                color="primary"
+                (click)="hiddenUsers = true ? !hiddenUsers : hiddenUsers"
+            >
                 {{ hiddenUsers ? 'Show only active users' : 'Show all users' }}
             </button>
 

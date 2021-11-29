@@ -4,8 +4,6 @@ import { IUserState } from './user.reducers';
 
 export const selectFeature = createFeatureSelector<IUserState>('userState');
 
-export const selectUser = createSelector(selectFeature, (state: IUserState, props) =>
-    state.users.find((user: User) => user.id == props.id),
-);
+export const selectUser = createSelector(selectFeature, (state: IUserState) => state.selectedUser);
 
 export const selectUsers = createSelector(selectFeature, (state: IUserState) => state.users);

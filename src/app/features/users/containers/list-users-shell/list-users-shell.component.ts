@@ -15,7 +15,6 @@ import { IUserState } from '../../store/user.reducers';
     providers: [UsersService],
 })
 export class ListUsersComponent implements OnInit, OnDestroy {
-    // public users: User[] = [];
     public hiddenUsers: boolean = true;
     public users$ = this.store.select(selectUsers);
     private destroy$: Subject<void> = new Subject();
@@ -37,10 +36,6 @@ export class ListUsersComponent implements OnInit, OnDestroy {
         this.store.dispatch(setActivateUser());
         this.users$ = this.store.select(selectUsers);
     }
-
-    // searchListUsers(data: User[]) {
-    //     this.users = data;
-    // }
 
     ngOnDestroy() {
         this.destroy$.next();

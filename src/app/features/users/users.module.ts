@@ -6,7 +6,7 @@ import { SharedModule } from 'src/app/shared-module/components/shared.module';
 import { MaterialModule } from 'src/app/shared-module/material/material.module';
 
 import { CreateNewUserShellComponent } from './containers/create-new-user-shell/create-new-user-shell.component';
-import { FormAddUserComponent } from './components/form-add-user/form-add-user.component';
+import { FormUserComponent } from './components/form-add-user/form-user.component';
 import { ListUsersComponent } from './containers/list-users-shell/list-users-shell.component';
 import { FormAddressComponent } from './components/form-address/form-address.component';
 import { EditUserShellComponent } from './containers/edit-user-shell/edit-user-shell.component';
@@ -32,7 +32,7 @@ import { UserEffect } from './store/user.effects';
 @NgModule({
     declarations: [
         CreateNewUserShellComponent,
-        FormAddUserComponent,
+        FormUserComponent,
         ListUsersComponent,
         FormAddressComponent,
         EditUserShellComponent,

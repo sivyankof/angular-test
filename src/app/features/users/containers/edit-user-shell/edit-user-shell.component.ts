@@ -3,12 +3,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
 import { User } from 'src/app/shared-module/interface/user.interface';
-import { UsersService } from 'src/app/shared-module/service/users.service';
 import { DialogComponent } from '../../components/dialog/dialog.component';
-import { FormAddUserComponent } from '../../components/form-add-user/form-add-user.component';
+import { FormUserComponent } from '../../components/form-add-user/form-user.component';
+import { loadUsers, selectTheUserToEdit, updateUser } from '../../store/user.actions';
 import { IUserState } from '../../store/user.reducers';
 import { selectUser } from '../../store/user.selector';
 
@@ -19,17 +18,14 @@ import { selectUser } from '../../store/user.selector';
 })
 export class EditUserShellComponent implements OnInit, OnDestroy {
     private id: string;
-    public user: any;
-    public userSaveForm = false;
+    public guardUserSaveForm = false;
+    public user$: Observable<User>;
     private destroy$ = new Subject();
 
-    public user$: Observable<User>;
-
-    @ViewChild(FormAddUserComponent) childForm: FormAddUserComponent;
+    @ViewChild(FormUserComponent) childForm: FormUserComponent;
 
     constructor(
         private route: ActivatedRoute,
-        private serviceUser: UsersService,
         private router: Router,
         public dialog: MatDialog,
         private store: Store<IUserState>,
@@ -37,25 +33,16 @@ export class EditUserShellComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.id = this.route.snapshot.params.id;
-        this.user$ = this.store.select(selectUser, { props: this.id });
-
-        console.log(this.user$);
-
-        // this.id = this.route.snapshot.params.id;
-        // this.serviceUser
-        //     .getOneUser(this.id)
-        //     .pipe(takeUntil(this.destroy$))
-        //     .subscribe((user) => ((this.user = user), console.log(this.user)));
+        this.store.dispatch(loadUsers());
+        this.store.dispatch(selectTheUserToEdit({ id: this.id }));
+        this.user$ = this.store.select(selectUser);
     }
 
     saveUser() {
         const form = this.childForm.formCreateUser.value;
-        this.serviceUser
-            .updateUser(form, this.id)
-            .pipe(takeUntil(this.destroy$))
-            .subscribe(() => this.router.navigate(['']));
-
-        this.userSaveForm = true;
+        this.store.dispatch(updateUser({ user: form }));
+        this.guardUserSaveForm = true;
+        this.router.navigate(['list-users']);
     }
 
     ngOnDestroy() {

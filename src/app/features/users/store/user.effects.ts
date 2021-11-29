@@ -3,7 +3,14 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { UsersService } from 'src/app/shared-module/service/users.service';
-import { loadNewUsers, loadNewUsersSuccess, loadUsers, loadUsersSuccess } from './user.actions';
+import {
+    loadNewUsers,
+    loadNewUsersSuccess,
+    loadUsers,
+    loadUsersSuccess,
+    selectTheUserToEdit,
+    selectTheUserToEditSuccess,
+} from './user.actions';
 
 @Injectable()
 export class UserEffect {
@@ -27,6 +34,20 @@ export class UserEffect {
                 this.userService.getOtherUsers().pipe(
                     map((users) => loadNewUsersSuccess({ users })),
                     catchError((err) => of(err)),
+                ),
+            ),
+        ),
+    );
+
+    selectTheUserToEdit$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(selectTheUserToEdit),
+            switchMap((action) =>
+                this.userService.getOneUser(action.id).pipe(
+                    map(
+                        (user) => selectTheUserToEditSuccess({ user }),
+                        catchError((err) => of(err)),
+                    ),
                 ),
             ),
         ),

@@ -1,26 +1,27 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ValidationErrors, Validators, FormArray } from '@angular/forms';
-import { combineLatest, Observable } from 'rxjs';
-import { skip, startWith } from 'rxjs/operators';
+import { combineLatest, Observable, Subject } from 'rxjs';
+import { skip, startWith, take, takeUntil } from 'rxjs/operators';
 
 import { User } from 'src/app/shared-module/interface/user.interface';
 import { ValidatorsService } from 'src/app/shared-module/service/validators.service';
 
 @Component({
-    selector: 'app-form-add-user',
-    templateUrl: './form-add-user.component.html',
-    styleUrls: ['./form-add-user.component.scss'],
+    selector: 'app-form-user',
+    templateUrl: './form-user.component.html',
+    styleUrls: ['./form-user.component.scss'],
 })
-export class FormAddUserComponent implements OnInit {
-    @Input() user?: User;
-    public disabledSpinner = false;
+export class FormUserComponent implements OnInit, OnDestroy {
+    @Input() user$?: Observable<User>;
+    public disabledSpinner = true;
     public formCreateUser: FormGroup;
+    private destroy$ = new Subject();
 
     constructor(private validatorsService: ValidatorsService) {}
 
     ngOnInit(): void {
         this.formCreateUser = new FormGroup({
-            login: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]), 
+            login: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
             firstName: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
             lastName: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
             age: new FormControl('', [Validators.min(15), Validators.max(100), Validators.required]),
@@ -37,7 +38,6 @@ export class FormAddUserComponent implements OnInit {
             addresses: new FormArray([]),
         });
 
-        this.timeLoader();
         this.checkValueName();
     }
 
@@ -71,12 +71,18 @@ export class FormAddUserComponent implements OnInit {
     }
 
     private timeLoader() {
-        setTimeout(() => {
-            if (!this.user) this.disabledSpinner = true;
-        }, 2000);
+        this.user$
+            .pipe(take(2), takeUntil(this.destroy$))
+            .subscribe((user) => (!user ? (this.disabledSpinner = false) : (this.disabledSpinner = true)));
     }
 
     ngOnChanges() {
-        if (this.user) this.formCreateUser.patchValue(this.user);
+        this.timeLoader();
+        this.user$.pipe(takeUntil(this.destroy$), skip(1)).subscribe((user) => this.formCreateUser.patchValue(user[0]));
+    }
+
+    ngOnDestroy() {
+        this.destroy$.next();
+        this.destroy$.complete();
     }
 }

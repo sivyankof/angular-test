@@ -70,12 +70,28 @@ export class UsersService {
     }
 
     getOneUser(id: string) {
-        return this.http.get(this.URL + `/users/${id}`, {
-            headers: {
-                Accept: `application/vnd.github.v3+json`,
-                // authorization: `token ${this.TOKEN}`,
-            },
-        });
+        // return this.http.get(this.URL + `/users/${id}`, {
+        //     headers: {
+        //         Accept: `application/vnd.github.v3+json`,
+        //         // authorization: `token ${this.TOKEN}`,
+        //     },
+        // });
+
+        return this.http.get('https://randomuser.me/api/?results=1').pipe(
+            map((obj: any) => {
+                return obj.results.map((user: getUser, i: number) => ({
+                    id: i + 1,
+                    age: user.dob.age,
+                    dob: user.dob.date,
+                    email: user.email,
+                    picture: user.picture.thumbnail,
+                    name: user.name.title + `.` + user.name.first + ` ` + user.name.last,
+                    location: user.location.city + ', ' + user.location.state + ', ' + user.location.country,
+                    address: user.location.street.name + ', ' + user.location.street.number,
+                    // activated: false,
+                }));
+            }),
+        );
     }
 
     getFollower(url: string) {

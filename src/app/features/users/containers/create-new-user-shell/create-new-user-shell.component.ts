@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { take } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
 
-import { UsersService } from 'src/app/shared-module/service/users.service';
-import { FormAddUserComponent } from '../../components/form-add-user/form-add-user.component';
+import { FormUserComponent } from '../../components/form-add-user/form-user.component';
+import { createNewUser } from '../../store/user.actions';
 
 @Component({
     selector: 'app-create-new-user-shell',
@@ -11,9 +11,9 @@ import { FormAddUserComponent } from '../../components/form-add-user/form-add-us
     styleUrls: ['./create-new-user-shell.component.scss'],
 })
 export class CreateNewUserShellComponent implements OnInit {
-    @ViewChild(FormAddUserComponent) childFormUser: FormAddUserComponent;
+    @ViewChild(FormUserComponent) childFormUser: FormUserComponent;
 
-    constructor(private usersService: UsersService, private router: Router) {}
+    constructor(private router: Router, private store: Store) {}
 
     ngOnInit(): void {}
 
@@ -22,10 +22,8 @@ export class CreateNewUserShellComponent implements OnInit {
         form.markAllAsTouched();
 
         if (form.valid) {
-            this.usersService
-                .addNewUser(form.value)
-                .pipe(take(1))
-                .subscribe(() => this.router.navigate(['']));
+            this.store.dispatch(createNewUser({ user: form.value }));
+            this.router.navigate(['list-users']);
         }
     }
 }

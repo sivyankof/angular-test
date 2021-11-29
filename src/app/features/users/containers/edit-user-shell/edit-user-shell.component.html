@@ -1,5 +1,7 @@
 <div class="container">
-    <!-- <app-form-add-user [user]="user | async"
-        ><button (click)="saveUser()" mat-raised-button color="warn">Save User</button></app-form-add-user
-    > -->
+    <H2>Edit user {{ (user$ | async)?.[0].name }}</H2>
+
+    <app-form-user [user$]="user$"
+        ><button (click)="saveUser()" mat-raised-button color="warn">Save User</button></app-form-user
+    >
 </div>

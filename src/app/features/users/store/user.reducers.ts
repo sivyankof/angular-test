@@ -1,6 +1,14 @@
 import { createReducer, on } from '@ngrx/store';
 
-import { loadNewUsersSuccess, loadUsersSuccess, setActivateUser, userNonActivate } from './user.actions';
+import {
+    createNewUser,
+    loadNewUsersSuccess,
+    loadUsersSuccess,
+    selectTheUserToEditSuccess,
+    setActivateUser,
+    updateUser,
+    userNonActivate,
+} from './user.actions';
 import { User } from 'src/app/shared-module/interface/user.interface';
 
 export interface IUserState {
@@ -36,6 +44,27 @@ const reducer = createReducer(
         return {
             ...state,
             users: updateUsers(state, id),
+        };
+    }),
+    on(selectTheUserToEditSuccess, (state, { user }) => {
+        return {
+            ...state,
+            selectedUser: user,
+        };
+    }),
+    on(updateUser, (state, { user }) => {
+        return {
+            ...state,
+            users: state.users.map((curUser) => (curUser.id === user.id ? user : curUser)),
+        };
+    }),
+    on(createNewUser, (state, { user }) => {
+        return {
+            ...state,
+            users: {
+                ...state.users,
+                ...user,
+            },
         };
     }),
 );

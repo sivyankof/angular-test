@@ -20,7 +20,7 @@ export class ExitEditGuard implements CanActivate, CanDeactivate<unknown> {
         currentState: RouterStateSnapshot,
         nextState?: RouterStateSnapshot,
     ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-        if (!component.childForm.formCreateUser.dirty || component.userSaveForm) {
+        if (!component.childForm.formCreateUser.dirty || component.guardUserSaveForm) {
             return true;
         } else {
             return component.openDialog();

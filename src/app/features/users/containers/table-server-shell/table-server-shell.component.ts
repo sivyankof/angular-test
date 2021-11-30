@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { merge, Subject } from 'rxjs';
+import { EMPTY, merge, Subject } from 'rxjs';
 import { catchError, map, startWith, switchMap, takeUntil } from 'rxjs/operators';
 
 import { UsersService } from 'src/app/shared-module/service/users.service';
@@ -39,7 +39,7 @@ export class TableServerShellComponent implements OnInit, AfterViewInit, OnDestr
                         this.sort.active,
                         this.sort.direction,
                         this.paginator.pageIndex,
-                    ).pipe(catchError(() => observableOf(null)));
+                    ).pipe(catchError(() => EMPTY));
                 }),
                 map((data) => {
                     this.isLoadingResults = false;
@@ -60,7 +60,4 @@ export class TableServerShellComponent implements OnInit, AfterViewInit, OnDestr
         this.destroy$.next();
         this.destroy$.complete();
     }
-}
-function observableOf(arg0: null): any {
-    throw new Error('Function not implemented.');
 }

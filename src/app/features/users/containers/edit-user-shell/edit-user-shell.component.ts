@@ -1,8 +1,8 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { User } from 'src/app/shared-module/interface/user.interface';
 import { DialogComponent } from '../../components/dialog/dialog.component';
@@ -16,11 +16,10 @@ import { selectUser } from '../../store/user.selector';
     templateUrl: './edit-user-shell.component.html',
     styleUrls: ['./edit-user-shell.component.scss'],
 })
-export class EditUserShellComponent implements OnInit, OnDestroy {
+export class EditUserShellComponent implements OnInit {
     private id: string;
     public guardUserSaveForm = false;
     public user$: Observable<User>;
-    private destroy$ = new Subject();
 
     @ViewChild(FormUserComponent) childForm: FormUserComponent;
 
@@ -43,11 +42,6 @@ export class EditUserShellComponent implements OnInit, OnDestroy {
         this.store.dispatch(updateUser({ user: form }));
         this.guardUserSaveForm = true;
         this.router.navigate(['list-users']);
-    }
-
-    ngOnDestroy() {
-        this.destroy$.next();
-        this.destroy$.complete();
     }
 
     openDialog() {

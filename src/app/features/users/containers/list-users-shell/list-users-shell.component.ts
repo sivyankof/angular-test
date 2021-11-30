@@ -30,6 +30,5 @@ export class ListUsersComponent implements OnInit {
 
     setActiveAllUsers() {
         this.store.dispatch(setActivateUser());
-        this.users$ = this.store.select(selectUsers);
     }
 }

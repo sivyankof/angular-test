@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, filter, map, switchMap } from 'rxjs/operators';
-import { User } from 'src/app/shared-module/interface/user.interface';
+import { catchError, map, switchMap } from 'rxjs/operators';
 import { UsersService } from 'src/app/shared-module/service/users.service';
 import {
     loadNewUsers,

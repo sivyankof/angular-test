@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, filter, map, switchMap } from 'rxjs/operators';
+import { User } from 'src/app/shared-module/interface/user.interface';
 import { UsersService } from 'src/app/shared-module/service/users.service';
 import {
     loadNewUsers,
     loadNewUsersSuccess,
     loadUsers,
     loadUsersSuccess,
+    searchUsers,
+    searchUsersSuccess,
     selectUserEdit,
     selectUserEditSuccess,
 } from './user.actions';
@@ -46,6 +49,25 @@ export class UserEffect {
                 this.userService.getOneUser(action.id).pipe(
                     map(
                         (user) => selectUserEditSuccess({ user }),
+                        catchError((err) => of(err)),
+                    ),
+                ),
+            ),
+        ),
+    );
+
+    searchUsers$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(searchUsers),
+            switchMap((action) =>
+                this.userService.getOtherUsers().pipe(
+                    map(
+                        (users) => {
+                            const searchUser = users.filter((user) =>
+                                user.name.toLowerCase().includes(action.data.toLowerCase()),
+                            );
+                            return searchUsersSuccess({ users: searchUser });
+                        },
                         catchError((err) => of(err)),
                     ),
                 ),

@@ -15,3 +15,6 @@ export const selectUserEditSuccess = createAction('[USERS EDIT] Select User Edit
 
 export const updateUser = createAction('[USERS EDIT] updateUser', props<{ user: User }>());
 export const createNewUser = createAction('[USERS CREATE] Create new user', props<{ user: User }>());
+
+export const searchUsers = createAction('[USERS SEARCH] Search Users', props<{ data: string }>());
+export const searchUsersSuccess = createAction('[USERS SEARCH] Search Users Success', props<{ users: User[] }>());

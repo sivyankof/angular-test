@@ -4,6 +4,7 @@ import {
     createNewUser,
     loadNewUsersSuccess,
     loadUsersSuccess,
+    searchUsersSuccess,
     selectUserEditSuccess,
     setActivateUser,
     updateUser,
@@ -53,6 +54,10 @@ const reducer = createReducer(
     on(createNewUser, (state, { user }) => ({
         ...state,
         users: [...state.users, user],
+    })),
+    on(searchUsersSuccess, (state, { users }) => ({
+        ...state,
+        users,
     })),
 );
 

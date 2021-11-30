@@ -14,6 +14,10 @@
 
     app-form-add-user,
     button {
+        position: relative;
+        top: 10px;
+        left: 50%;
+        transform: translate(-50%, 0);
         margin-bottom: 20px;
     }
 }

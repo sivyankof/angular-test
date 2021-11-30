@@ -74,8 +74,6 @@
                 <mat-radio-button value="Man">Man</mat-radio-button>
                 <mat-radio-button value="Woman">Woman</mat-radio-button>
             </mat-radio-group>
-
-            <ng-content></ng-content>
         </div>
     </mat-tab>
 
@@ -83,3 +81,5 @@
         <app-form-address (childFormAddress)="addChildForm($event)"></app-form-address>
     </mat-tab>
 </mat-tab-group>
+
+<ng-content></ng-content>

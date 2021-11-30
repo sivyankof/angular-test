@@ -57,7 +57,7 @@ export class FormAddressComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.destroy$.next(null);
+        this.destroy$.next();
         this.destroy$.complete();
     }
 }

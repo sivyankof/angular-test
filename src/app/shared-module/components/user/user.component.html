@@ -1,5 +1,15 @@
 <mat-card id="item" [ngClass]="{ 'non-active': !user.activated }">
-    <mat-card-title class="title"><img mat-card-avatar src="{{ user.picture }}" /> {{ user.name }}</mat-card-title>
+    <mat-card-title class="title"
+        ><img
+            mat-card-avatar
+            src="{{
+                user.picture
+                    ? user.picture
+                    : 'https://www.springvalelearning.com/wp-content/uploads/2020/04/erson-outline-icon-png-person-icon-png-white-11562864385wyirbbsupu-1.png'
+            }}"
+        />
+        {{ user.name }}</mat-card-title
+    >
 
     <mat-card-content>
         <p>Age: {{ user.age ? user.age : 'none' }}</p>

@@ -10,11 +10,8 @@ export const userNonActivate = createAction('[USERS] Set Non Activate User', pro
 export const loadNewUsers = createAction('[USERS EFFECT] Load New Users');
 export const loadNewUsersSuccess = createAction('[USERS] Load New Users Success', props<{ users: User[] }>());
 
-export const selectTheUserToEdit = createAction('[USERS EDIT] Select The User To Edit', props<{ id: string }>());
-export const selectTheUserToEditSuccess = createAction(
-    '[USERS EDIT] Select The User To Edit Success',
-    props<{ user: User }>(),
-);
+export const selectUserEdit = createAction('[USERS EDIT] Select User Edit', props<{ id: string }>());
+export const selectUserEditSuccess = createAction('[USERS EDIT] Select User Edit Success', props<{ user: User }>());
 
 export const updateUser = createAction('[USERS EDIT] updateUser', props<{ user: User }>());
 export const createNewUser = createAction('[USERS CREATE] Create new user', props<{ user: User }>());

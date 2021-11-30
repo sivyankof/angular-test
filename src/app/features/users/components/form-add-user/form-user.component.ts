@@ -36,6 +36,7 @@ export class FormUserComponent implements OnInit, OnDestroy {
             ),
             activated: new FormControl(true),
             addresses: new FormArray([]),
+            id: new FormControl(''),
         });
 
         this.checkValueName();

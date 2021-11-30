@@ -8,8 +8,8 @@ import {
     loadNewUsersSuccess,
     loadUsers,
     loadUsersSuccess,
-    selectTheUserToEdit,
-    selectTheUserToEditSuccess,
+    selectUserEdit,
+    selectUserEditSuccess,
 } from './user.actions';
 
 @Injectable()
@@ -41,11 +41,11 @@ export class UserEffect {
 
     selectTheUserToEdit$ = createEffect(() =>
         this.actions$.pipe(
-            ofType(selectTheUserToEdit),
+            ofType(selectUserEdit),
             switchMap((action) =>
                 this.userService.getOneUser(action.id).pipe(
                     map(
-                        (user) => selectTheUserToEditSuccess({ user }),
+                        (user) => selectUserEditSuccess({ user }),
                         catchError((err) => of(err)),
                     ),
                 ),

@@ -7,7 +7,7 @@ import { Observable, Subject } from 'rxjs';
 import { User } from 'src/app/shared-module/interface/user.interface';
 import { DialogComponent } from '../../components/dialog/dialog.component';
 import { FormUserComponent } from '../../components/form-add-user/form-user.component';
-import { loadUsers, selectTheUserToEdit, updateUser } from '../../store/user.actions';
+import { loadUsers, selectUserEdit, updateUser } from '../../store/user.actions';
 import { IUserState } from '../../store/user.reducers';
 import { selectUser } from '../../store/user.selector';
 
@@ -34,7 +34,7 @@ export class EditUserShellComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.id = this.route.snapshot.params.id;
         this.store.dispatch(loadUsers());
-        this.store.dispatch(selectTheUserToEdit({ id: this.id }));
+        this.store.dispatch(selectUserEdit({ id: this.id }));
         this.user$ = this.store.select(selectUser);
     }
 

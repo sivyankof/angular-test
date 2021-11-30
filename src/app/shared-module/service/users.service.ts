@@ -69,7 +69,7 @@ export class UsersService {
         return of(users).pipe(delay(1000));
     }
 
-    getOneUser(id: string) {
+    getOneUser(id?: string) {
         // return this.http.get(this.URL + `/users/${id}`, {
         //     headers: {
         //         Accept: `application/vnd.github.v3+json`,

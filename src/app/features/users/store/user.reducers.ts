@@ -4,7 +4,7 @@ import {
     createNewUser,
     loadNewUsersSuccess,
     loadUsersSuccess,
-    selectTheUserToEditSuccess,
+    selectUserEditSuccess,
     setActivateUser,
     updateUser,
     userNonActivate,
@@ -25,13 +25,13 @@ const reducer = createReducer(
     initialUserState,
     on(loadUsersSuccess, (state, { users }) => ({
         ...state,
-        users,
+        users: setAllUsers(state, users),
     })),
     on(loadNewUsersSuccess, (state, { users }) => {
         let count = 0;
         return {
             ...state,
-            users: pushNewUsers(state, users, count),
+            users: loadNewUsers(state, users, count),
         };
     }),
     on(setActivateUser, (state) => {
@@ -43,10 +43,10 @@ const reducer = createReducer(
     on(userNonActivate, (state, { id }) => {
         return {
             ...state,
-            users: updateUsers(state, id),
+            users: updateNonActiveUsers(state, id),
         };
     }),
-    on(selectTheUserToEditSuccess, (state, { user }) => {
+    on(selectUserEditSuccess, (state, { user }) => {
         return {
             ...state,
             selectedUser: user,
@@ -55,16 +55,13 @@ const reducer = createReducer(
     on(updateUser, (state, { user }) => {
         return {
             ...state,
-            users: state.users.map((curUser) => (curUser.id === user.id ? user : curUser)),
+            users: updateOneUser(state, user),
         };
     }),
     on(createNewUser, (state, { user }) => {
         return {
             ...state,
-            users: {
-                ...state.users,
-                ...user,
-            },
+            users: [...state.users, user],
         };
     }),
 );
@@ -73,7 +70,7 @@ export function UserReducer(state: IUserState, action): IUserState {
     return reducer(state, action);
 }
 
-function updateUsers(state: IUserState, id: string) {
+function updateNonActiveUsers(state: IUserState, id: string) {
     return state.users.map((user) => {
         const copyUser = { ...user };
         user.id === id ? (copyUser.activated = false) : copyUser.activated;
@@ -81,7 +78,7 @@ function updateUsers(state: IUserState, id: string) {
     });
 }
 
-function pushNewUsers(state: IUserState, users: User[], count: number) {
+function loadNewUsers(state: IUserState, users: User[], count: number) {
     return state.users.concat(users).map((user) => {
         count++;
         const copy = { ...user };
@@ -95,4 +92,26 @@ function setActivateAllUsers(state: IUserState) {
         ...user,
         activated: !user.activated,
     }));
+}
+
+function setAllUsers(state: IUserState, users: User[]) {
+    return !state.users ? users : state.users;
+}
+
+function updateOneUser(state: IUserState, user: User) {
+    return state.users.map((curUser) => {
+        if (curUser.id === user.id) {
+            const copyUser = { ...curUser };
+
+            for (const key in user) {
+                if (user[key] !== '') {
+                    copyUser[key] = user[key];
+                }
+            }
+
+            return copyUser;
+        } else {
+            return curUser;
+        }
+    });
 }

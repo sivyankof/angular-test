@@ -19,11 +19,18 @@ export class AuthService {
             users.push(obj);
             valid = true;
         }
-        return valid ? of(obj).pipe(delay(1000)) : throwError('Error. User with that login already has.');
+        return valid
+            ? of(obj).pipe(delay(1000))
+            : throwError('Error. User with that login already has.');
     }
 
     setLoginUser(user: User): Observable<any> {
-        const valid = users.filter((el: User): any => el.login === user.login && el.password === user.password);
-        return valid.length ? of(user).pipe(delay(1000)) : throwError('Login or password mistake');
+        const valid = users.filter(
+            (el: User): any =>
+                el.login === user.login && el.password === user.password
+        );
+        return valid.length
+            ? of(user).pipe(delay(1000))
+            : throwError('Login or password mistake');
     }
 }

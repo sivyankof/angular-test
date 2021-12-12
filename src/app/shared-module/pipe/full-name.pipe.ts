@@ -6,6 +6,6 @@ import { User } from '../interface/user.interface';
 })
 export class FullNamePipe implements PipeTransform {
     transform(value: User): string {
-        return `${value.login + ` ` + value.name}`;
+        return `${value.login + ' ' + value.name}`;
     }
 }

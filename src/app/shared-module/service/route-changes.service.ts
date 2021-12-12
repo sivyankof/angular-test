@@ -14,9 +14,11 @@ export class RouteChangesService {
     }
 
     getPathRout() {
-        this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe((event: NavigationEnd) => {
-            this.errMess.next(this.yourPlace(event.url));
-        });
+        this.router.events
+            .pipe(filter((event) => event instanceof NavigationEnd))
+            .subscribe((event: NavigationEnd) => {
+                this.errMess.next(this.yourPlace(event.url));
+            });
     }
 
     yourPlace(name: any) {

@@ -24,21 +24,22 @@ export class UserEffect {
             switchMap(() =>
                 this.userService.getOtherUsers().pipe(
                     map((users) => loadUsersSuccess({ users })),
-                    catchError((err) => of(err)),
-                ),
-            ),
-        ),
+                    catchError((err) => of(err))
+                )
+            )
+        )
     );
+
     loadNewUsers$ = createEffect(() =>
         this.actions$.pipe(
             ofType(loadNewUsers),
             switchMap(() =>
                 this.userService.getOtherUsers().pipe(
                     map((users) => loadNewUsersSuccess({ users })),
-                    catchError((err) => of(err)),
-                ),
-            ),
-        ),
+                    catchError((err) => of(err))
+                )
+            )
+        )
     );
 
     selectTheUserToEdit$ = createEffect(() =>
@@ -48,11 +49,11 @@ export class UserEffect {
                 this.userService.getOneUser(action.id).pipe(
                     map(
                         (user) => selectUserEditSuccess({ user }),
-                        catchError((err) => of(err)),
-                    ),
-                ),
-            ),
-        ),
+                        catchError((err) => of(err))
+                    )
+                )
+            )
+        )
     );
 
     searchUsers$ = createEffect(() =>
@@ -63,14 +64,16 @@ export class UserEffect {
                     map(
                         (users) => {
                             const searchUser = users.filter((user) =>
-                                user.name.toLowerCase().includes(action.data.toLowerCase()),
+                                user.name
+                                    .toLowerCase()
+                                    .includes(action.data.toLowerCase())
                             );
                             return searchUsersSuccess({ users: searchUser });
                         },
-                        catchError((err) => of(err)),
-                    ),
-                ),
-            ),
-        ),
+                        catchError((err) => of(err))
+                    )
+                )
+            )
+        )
     );
 }

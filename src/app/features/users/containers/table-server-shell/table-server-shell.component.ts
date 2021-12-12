@@ -1,8 +1,20 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+    AfterViewInit,
+    Component,
+    OnDestroy,
+    OnInit,
+    ViewChild,
+} from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { EMPTY, merge, Subject } from 'rxjs';
-import { catchError, map, startWith, switchMap, takeUntil } from 'rxjs/operators';
+import {
+    catchError,
+    map,
+    startWith,
+    switchMap,
+    takeUntil,
+} from 'rxjs/operators';
 
 import { UsersService } from 'src/app/shared-module/service/users.service';
 
@@ -11,15 +23,30 @@ import { UsersService } from 'src/app/shared-module/service/users.service';
     templateUrl: './table-server-shell.component.html',
     styleUrls: ['./table-server-shell.component.scss'],
 })
-export class TableServerShellComponent implements OnInit, AfterViewInit, OnDestroy {
-    public displayedColumns: string[] = ['id', 'picture', 'name', 'dob', 'location', 'email'];
+export class TableServerShellComponent
+    implements OnInit, AfterViewInit, OnDestroy
+{
+    public displayedColumns: string[] = [
+        'id',
+        'picture',
+        'name',
+        'dob',
+        'location',
+        'email',
+    ];
+
     private destroy$: Subject<any> = new Subject();
+
     public data = [];
+
     public resultsLength = 0;
+
     public isLoadingResults = true;
+
     public isRateLimitReached = false;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
+
     @ViewChild(MatSort) sort: MatSort;
 
     constructor(private userService: UsersService) {}
@@ -38,7 +65,7 @@ export class TableServerShellComponent implements OnInit, AfterViewInit, OnDestr
                     return this.userService!.getRepoIssues(
                         this.sort.active,
                         this.sort.direction,
-                        this.paginator.pageIndex,
+                        this.paginator.pageIndex
                     ).pipe(catchError(() => EMPTY));
                 }),
                 map((data) => {
@@ -50,8 +77,11 @@ export class TableServerShellComponent implements OnInit, AfterViewInit, OnDestr
                     }
 
                     this.resultsLength = data.length;
-                    return data.slice(this.paginator.pageIndex * 10, this.paginator.pageIndex * 10 + 10);
-                }),
+                    return data.slice(
+                        this.paginator.pageIndex * 10,
+                        this.paginator.pageIndex * 10 + 10
+                    );
+                })
             )
             .subscribe((data) => (this.data = data));
     }

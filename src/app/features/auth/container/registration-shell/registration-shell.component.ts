@@ -24,7 +24,9 @@ export class RegistrationShellComponent implements OnInit {
             this.authService
                 .regNewUser({
                     login: this.registration.newUserForm.value.login,
-                    password: this.registration.newUserForm.get('passGroup').value.password,
+                    password:
+                        this.registration.newUserForm.get('passGroup').value
+                            .password,
                     firstName: 'none',
                     age: 10,
                     activated: true,
@@ -35,7 +37,7 @@ export class RegistrationShellComponent implements OnInit {
                     (e) => {
                         console.error(e);
                         this.registration.errLogin = e;
-                    },
+                    }
                 );
         }
     }

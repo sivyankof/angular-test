@@ -1,5 +1,17 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
-import { AbstractControl, FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+    Component,
+    EventEmitter,
+    OnDestroy,
+    OnInit,
+    Output,
+} from '@angular/core';
+import {
+    AbstractControl,
+    FormArray,
+    FormControl,
+    FormGroup,
+    Validators,
+} from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -12,7 +24,10 @@ export class FormAddressComponent implements OnInit, OnDestroy {
     @Output() childFormAddress = new EventEmitter<any>();
 
     private destroy$ = new Subject();
-    public currentForm: FormGroup = new FormGroup({ addresses: new FormArray([]) });
+
+    public currentForm: FormGroup = new FormGroup({
+        addresses: new FormArray([]),
+    });
 
     constructor() {}
 
@@ -30,8 +45,11 @@ export class FormAddressComponent implements OnInit, OnDestroy {
             new FormGroup({
                 address: new FormControl('', Validators.required),
                 city: new FormControl(''),
-                zip: new FormControl({ value: '', disabled: true }, Validators.required),
-            }),
+                zip: new FormControl(
+                    { value: '', disabled: true },
+                    Validators.required
+                ),
+            })
         );
     }
 
@@ -40,7 +58,8 @@ export class FormAddressComponent implements OnInit, OnDestroy {
     }
 
     hasValue() {
-        const arrControls = (this.currentForm.get('addresses') as FormArray).controls;
+        const arrControls = (this.currentForm.get('addresses') as FormArray)
+            .controls;
 
         arrControls.forEach((group) => {
             if (group.get('city').value.length >= 1) {

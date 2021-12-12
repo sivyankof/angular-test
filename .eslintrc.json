@@ -1,0 +1,57 @@
+{
+	"root": true,
+	"ignorePatterns": ["projects/**/*"],
+	"overrides": [
+		{
+			"files": ["*.ts"],
+			"parserOptions": {
+				"project": "./tsconfig.json",
+				"createDefaultProgram": true
+			},
+			"extends": [
+				"plugin:@angular-eslint/recommended",
+				"airbnb-typescript/base",
+				"plugin:prettier/recommended",
+				"prettier"
+			],
+
+			"rules": {
+				"import/no-unresolved": "off",
+				"import/prefer-default-export": "off",
+				"arrow-body-style": "off",
+				"prefer-arrow-callback": "off",
+				"prettier/prettier": ["error", { "singleQuote": true, "tabWidth": 4 }],
+				"class-methods-use-this": "off",
+				"lines-between-class-members": "off",
+				"@typescript-eslint/unbound-method": [
+					"error",
+					{
+						"ignoreStatic": true
+					}
+				],
+				"@angular-eslint/directive-selector": [
+					"error",
+					{
+						"type": "attribute",
+						"prefix": "app",
+						"style": "camelCase"
+					}
+				],
+				"@angular-eslint/component-selector": [
+					"error",
+					{
+						"type": "element",
+						"prefix": "app",
+						"style": "kebab-case"
+					}
+				]
+			},
+			"plugins": ["prettier", "import"]
+		},
+		{
+			"files": ["*.html"],
+			"extends": ["plugin:@angular-eslint/template/recommended"],
+			"rules": {}
+		}
+	]
+}

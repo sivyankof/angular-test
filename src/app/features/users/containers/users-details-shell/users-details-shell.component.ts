@@ -11,9 +11,13 @@ import { UsersService } from 'src/app/shared-module/service/users.service';
 })
 export class UsersDetailsShellComponent implements OnInit {
     public user: any;
+
     public date: Date;
 
-    constructor(private route: ActivatedRoute, private userService: UsersService) {}
+    constructor(
+        private route: ActivatedRoute,
+        private userService: UsersService
+    ) {}
 
     ngOnInit(): void {
         let id = this.route.snapshot.params.id;

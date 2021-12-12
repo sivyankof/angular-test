@@ -11,7 +11,18 @@ import { RegistrationShellComponent } from './container/registration-shell/regis
 import { SharedModule } from 'src/app/shared-module/components/shared.module';
 
 @NgModule({
-    declarations: [LoginShellComponent, LoginComponent, RegistrationComponent, RegistrationShellComponent],
-    imports: [CommonModule, AuthRoutingModule, MaterialModule, ReactiveFormsModule, SharedModule],
+    declarations: [
+        LoginShellComponent,
+        LoginComponent,
+        RegistrationComponent,
+        RegistrationShellComponent,
+    ],
+    imports: [
+        CommonModule,
+        AuthRoutingModule,
+        MaterialModule,
+        ReactiveFormsModule,
+        SharedModule,
+    ],
 })
 export class AuthModule {}

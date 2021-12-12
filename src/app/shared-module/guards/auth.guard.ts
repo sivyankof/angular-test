@@ -18,8 +18,12 @@ export class AuthGuard implements CanActivate {
 
     canActivate(
         route: ActivatedRouteSnapshot,
-        state: RouterStateSnapshot,
-    ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+        state: RouterStateSnapshot
+    ):
+        | Observable<boolean | UrlTree>
+        | Promise<boolean | UrlTree>
+        | boolean
+        | UrlTree {
         const login = localStorage.getItem('login');
         if (login) {
             return true;
@@ -31,8 +35,12 @@ export class AuthGuard implements CanActivate {
 
     canLoad(
         route: Route,
-        segments: UrlSegment[],
-    ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+        segments: UrlSegment[]
+    ):
+        | Observable<boolean | UrlTree>
+        | Promise<boolean | UrlTree>
+        | boolean
+        | UrlTree {
         const login = localStorage.getItem('login');
         if (login) {
             return true;

@@ -7,7 +7,11 @@ import { Observable } from 'rxjs';
 import { User } from 'src/app/shared-module/interface/user.interface';
 import { DialogComponent } from '../../components/dialog/dialog.component';
 import { FormUserComponent } from '../../components/form-add-user/form-user.component';
-import { loadUsers, selectUserEdit, updateUser } from '../../store/user.actions';
+import {
+    loadUsers,
+    selectUserEdit,
+    updateUser,
+} from '../../store/user.actions';
 import { IUserState } from '../../store/user.reducers';
 import { selectUser } from '../../store/user.selector';
 
@@ -18,7 +22,9 @@ import { selectUser } from '../../store/user.selector';
 })
 export class EditUserShellComponent implements OnInit {
     private id: string;
+
     public guardUserSaveForm = false;
+
     public user$: Observable<User>;
 
     @ViewChild(FormUserComponent) childForm: FormUserComponent;
@@ -27,7 +33,7 @@ export class EditUserShellComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         public dialog: MatDialog,
-        private store: Store<IUserState>,
+        private store: Store<IUserState>
     ) {}
 
     ngOnInit(): void {

@@ -6,7 +6,8 @@ import { Component, Input, OnInit } from '@angular/core';
     styleUrls: ['./company-info.component.scss'],
 })
 export class CompanyInfoComponent implements OnInit {
-    @Input() user: any;
+    user: any;
+
     constructor() {}
 
     ngOnInit(): void {}

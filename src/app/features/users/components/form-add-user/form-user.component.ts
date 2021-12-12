@@ -1,5 +1,11 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup, ValidationErrors, Validators, FormArray } from '@angular/forms';
+import {
+    FormControl,
+    FormGroup,
+    ValidationErrors,
+    Validators,
+    FormArray,
+} from '@angular/forms';
 import { combineLatest, Observable, Subject } from 'rxjs';
 import { skip, startWith, take, takeUntil } from 'rxjs/operators';
 
@@ -13,26 +19,49 @@ import { ValidatorsService } from 'src/app/shared-module/service/validators.serv
 })
 export class FormUserComponent implements OnInit, OnDestroy {
     @Input() user$?: Observable<User>;
+
     public disabledSpinner = true;
+
     public formCreateUser: FormGroup;
+
     private destroy$ = new Subject();
 
     constructor(private validatorsService: ValidatorsService) {}
 
     ngOnInit(): void {
         this.formCreateUser = new FormGroup({
-            login: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
-            firstName: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
-            lastName: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
-            age: new FormControl('', [Validators.min(15), Validators.max(100), Validators.required]),
+            login: new FormControl('', [
+                Validators.required,
+                Validators.minLength(3),
+                Validators.maxLength(20),
+            ]),
+            firstName: new FormControl('', [
+                Validators.required,
+                Validators.minLength(3),
+                Validators.maxLength(20),
+            ]),
+            lastName: new FormControl('', [
+                Validators.required,
+                Validators.minLength(3),
+                Validators.maxLength(20),
+            ]),
+            age: new FormControl('', [
+                Validators.min(15),
+                Validators.max(100),
+                Validators.required,
+            ]),
             company: new FormControl('', Validators.maxLength(35)),
             department: new FormControl('', Validators.minLength(6)),
             photo: new FormControl(''),
             gender: new FormControl('Man', Validators.required),
             email: new FormControl(
                 '',
-                [Validators.required, Validators.email, () => this.emailNameValidator],
-                [this.repeatEmailValidator.bind(this)],
+                [
+                    Validators.required,
+                    Validators.email,
+                    () => this.emailNameValidator,
+                ],
+                [this.repeatEmailValidator.bind(this)]
             ),
             activated: new FormControl(true),
             addresses: new FormArray([]),
@@ -54,32 +83,50 @@ export class FormUserComponent implements OnInit, OnDestroy {
         combineLatest([
             this.formCreateUser
                 .get('firstName')
-                .valueChanges.pipe(startWith(this.formCreateUser.get('firstName').value)),
-            this.formCreateUser.get('lastName').valueChanges.pipe(startWith(this.formCreateUser.get('lastName').value)),
+                .valueChanges.pipe(
+                    startWith(this.formCreateUser.get('firstName').value)
+                ),
+            this.formCreateUser
+                .get('lastName')
+                .valueChanges.pipe(
+                    startWith(this.formCreateUser.get('lastName').value)
+                ),
         ])
             .pipe(skip(2))
             .subscribe(([name, surname]) => {
-                this.formCreateUser.get('email').setValue(`${name + surname + '@gmail.com'}`);
+                this.formCreateUser
+                    .get('email')
+                    .setValue(`${name + surname + '@gmail.com'}`);
             });
     }
 
-    private emailNameValidator(control: FormControl): { [s: string]: boolean } | null {
+    private emailNameValidator(
+        control: FormControl
+    ): { [s: string]: boolean } | null {
         return this.validatorsService.emailName(control.value);
     }
 
-    private repeatEmailValidator(control: FormControl): Observable<ValidationErrors> {
+    private repeatEmailValidator(
+        control: FormControl
+    ): Observable<ValidationErrors> {
         return this.validatorsService.emailRepeat(control.value);
     }
 
     private timeLoader() {
         this.user$
             .pipe(take(2), takeUntil(this.destroy$))
-            .subscribe((user) => (!user ? (this.disabledSpinner = false) : (this.disabledSpinner = true)));
+            .subscribe((user) =>
+                !user
+                    ? (this.disabledSpinner = false)
+                    : (this.disabledSpinner = true)
+            );
     }
 
     ngOnChanges() {
         this.timeLoader();
-        this.user$.pipe(takeUntil(this.destroy$), skip(1)).subscribe((user) => this.formCreateUser.patchValue(user[0]));
+        this.user$
+            .pipe(takeUntil(this.destroy$), skip(1))
+            .subscribe((user) => this.formCreateUser.patchValue(user[0]));
     }
 
     ngOnDestroy() {

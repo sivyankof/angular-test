@@ -44,7 +44,9 @@ interface getUser {
 })
 export class UsersService {
     private URL = 'https://api.github.com';
+
     private user: BehaviorSubject<User> = new BehaviorSubject<User>(null);
+
     public userObs: Observable<User> = this.user.asObservable();
 
     constructor(private http: HttpClient) {}
@@ -57,7 +59,7 @@ export class UsersService {
     getUsers(countPage): Observable<any> {
         return this.http.get(this.URL + '/users', {
             headers: {
-                Accept: `application/vnd.github.v3+json`,
+                Accept: 'application/vnd.github.v3+json',
             },
             params: { per_page: countPage * 10 },
         });
@@ -83,26 +85,40 @@ export class UsersService {
                     dob: user.dob.date,
                     email: user.email,
                     picture: user.picture.thumbnail,
-                    name: user.name.title + `.` + user.name.first + ` ` + user.name.last,
-                    location: user.location.city + ', ' + user.location.state + ', ' + user.location.country,
-                    address: user.location.street.name + ', ' + user.location.street.number,
+                    name:
+                        user.name.title +
+                        '.' +
+                        user.name.first +
+                        ' ' +
+                        user.name.last,
+                    location:
+                        user.location.city +
+                        ', ' +
+                        user.location.state +
+                        ', ' +
+                        user.location.country,
+                    address:
+                        user.location.street.name +
+                        ', ' +
+                        user.location.street.number,
                     // activated: false,
                 }));
-            }),
+            })
         );
     }
 
     getFollower(url: string) {
         return this.http.get(url, {
             headers: {
-                Accept: `application/vnd.github.v3+json`,
+                Accept: 'application/vnd.github.v3+json',
             },
         });
     }
+
     getRepos(url: string) {
         return this.http.get(url, {
             headers: {
-                Accept: `application/vnd.github.v3+json`,
+                Accept: 'application/vnd.github.v3+json',
             },
         });
     }
@@ -121,16 +137,33 @@ export class UsersService {
                     dob: user.dob.date,
                     email: user.email,
                     picture: user.picture.thumbnail,
-                    name: user.name.title + `.` + user.name.first + ` ` + user.name.last,
-                    location: user.location.city + ', ' + user.location.state + ', ' + user.location.country,
-                    address: user.location.street.name + ', ' + user.location.street.number,
+                    name:
+                        user.name.title +
+                        '.' +
+                        user.name.first +
+                        ' ' +
+                        user.name.last,
+                    location:
+                        user.location.city +
+                        ', ' +
+                        user.location.state +
+                        ', ' +
+                        user.location.country,
+                    address:
+                        user.location.street.name +
+                        ', ' +
+                        user.location.street.number,
                     // activated: false,
                 }));
-            }),
+            })
         );
     }
 
-    getRepoIssues(sort: string, order: SortDirection, page: number): Observable<any> {
+    getRepoIssues(
+        sort: string,
+        order: SortDirection,
+        page: number
+    ): Observable<any> {
         return this.http.get('https://randomuser.me/api/?results=100').pipe(
             map((obj: any) => {
                 return obj.results.map((user: getUser, i: number) => ({
@@ -139,12 +172,25 @@ export class UsersService {
                     dob: user.dob.date,
                     email: user.email,
                     picture: user.picture.thumbnail,
-                    name: user.name.title + `.` + user.name.first + ` ` + user.name.last,
-                    location: user.location.city + ', ' + user.location.state + ', ' + user.location.country,
-                    address: user.location.street.name + ', ' + user.location.street.number,
+                    name:
+                        user.name.title +
+                        '.' +
+                        user.name.first +
+                        ' ' +
+                        user.name.last,
+                    location:
+                        user.location.city +
+                        ', ' +
+                        user.location.state +
+                        ', ' +
+                        user.location.country,
+                    address:
+                        user.location.street.name +
+                        ', ' +
+                        user.location.street.number,
                 }));
             }),
-            map((users) => this.mySort(users, sort, order)),
+            map((users) => this.mySort(users, sort, order))
         );
     }
 

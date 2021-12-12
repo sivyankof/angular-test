@@ -8,13 +8,18 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class RegistrationComponent implements OnInit {
     public newUserForm: FormGroup;
+
     public errLogin: '';
 
     constructor() {}
 
     ngOnInit(): void {
         this.newUserForm = new FormGroup({
-            login: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
+            login: new FormControl('', [
+                Validators.required,
+                Validators.minLength(3),
+                Validators.maxLength(20),
+            ]),
             passGroup: new FormGroup(
                 {
                     password: new FormControl(null, [
@@ -28,14 +33,15 @@ export class RegistrationComponent implements OnInit {
                         Validators.maxLength(20),
                     ]),
                 },
-                this.confirmPass,
+                this.confirmPass
             ),
         });
     }
 
     private confirmPass(control: FormGroup): { [s: string]: boolean } | null {
         const valid = control.value.password === control.value.confirmPassword;
-        if (!valid) control.get('confirmPassword').setErrors({ confirmPass: true });
+        if (!valid)
+            control.get('confirmPassword').setErrors({ confirmPass: true });
         else control.get('confirmPassword').setErrors(null);
 
         return valid ? null : { pass: true };

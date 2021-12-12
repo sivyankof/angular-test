@@ -11,6 +11,7 @@ export class OtherInfoComponent implements OnInit {
     @Input() user: any;
 
     public repos: Observable<object>;
+
     constructor(private userService: UsersService) {}
 
     ngOnInit(): void {

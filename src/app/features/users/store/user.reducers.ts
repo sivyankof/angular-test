@@ -58,7 +58,7 @@ const reducer = createReducer(
     on(searchUsersSuccess, (state, { users }) => ({
         ...state,
         users,
-    })),
+    }))
 );
 
 export function UserReducer(state: IUserState, action): IUserState {

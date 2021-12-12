@@ -10,7 +10,9 @@ import { UsersService } from 'src/app/shared-module/service/users.service';
 })
 export class PersonalInfoComponent implements OnInit {
     @Input() user: any;
+
     public followers: Observable<Object>;
+
     public onHideFollower: boolean = false;
 
     constructor(private userService: UsersService) {}

@@ -10,8 +10,11 @@ import { User } from '../../interface/user.interface';
 })
 export class UserComponent implements OnInit {
     @Input() user: User;
+
     @Input() id: number;
+
     @Input() hiddenUsers: Boolean;
+
     @Output() toggleActiveUser: EventEmitter<User> = new EventEmitter();
 
     public errorMes: boolean = false;

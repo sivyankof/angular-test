@@ -13,6 +13,7 @@ import { searchUsers } from '../../store/user.actions';
 })
 export class SearchUserShellComponent implements OnInit, OnDestroy {
     private destroy$: Subject<any> = new Subject();
+
     public mySearch: FormGroup;
 
     constructor(private store: Store) {}
@@ -25,8 +26,14 @@ export class SearchUserShellComponent implements OnInit, OnDestroy {
     findUser() {
         this.mySearch
             .get('search')
-            .valueChanges.pipe(takeUntil(this.destroy$), debounceTime(500), distinctUntilChanged())
-            .subscribe((data) => this.store.dispatch(searchUsers({ data: data })));
+            .valueChanges.pipe(
+                takeUntil(this.destroy$),
+                debounceTime(500),
+                distinctUntilChanged()
+            )
+            .subscribe((data) =>
+                this.store.dispatch(searchUsers({ data: data }))
+            );
     }
 
     ngOnDestroy() {

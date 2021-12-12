@@ -10,16 +10,19 @@ export class ErrorValidatorComponent implements OnInit, DoCheck {
     @Input() control: FormControl;
 
     public errorMessage: string;
+
     private message: object = {
         required: () => 'Required field',
-        minlength: () => `Min length ${this.control.errors.minlength.requiredLength} symbols`,
-        maxlength: () => `Max length ${this.control.errors.maxlength.requiredLength} symbols`,
+        minlength: () =>
+            `Min length ${this.control.errors.minlength.requiredLength} symbols`,
+        maxlength: () =>
+            `Max length ${this.control.errors.maxlength.requiredLength} symbols`,
         min: () => `Min ${this.control.errors.min.min} age`,
         max: () => `Max ${this.control.errors.max.max} age`,
-        email: () => `In email need "@"`,
-        mailName: () => `Mail must include "@gmail" and "."`,
-        doubleEmail: () => `Such Mail already exists`,
-        confirmPass: () => `Your confirm password mistake`,
+        email: () => 'In email need "@"',
+        mailName: () => 'Mail must include "@gmail" and "."',
+        doubleEmail: () => 'Such Mail already exists',
+        confirmPass: () => 'Your confirm password mistake',
     };
 
     constructor() {}

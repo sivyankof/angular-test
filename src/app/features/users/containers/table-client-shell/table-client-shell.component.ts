@@ -12,10 +12,19 @@ import { UsersService } from 'src/app/shared-module/service/users.service';
     styleUrls: ['./table-client-shell.component.scss'],
 })
 export class TableClientShellComponent implements OnInit {
-    public displayedColumns: string[] = ['id', 'picture', 'name', 'dob', 'location', 'email'];
+    public displayedColumns: string[] = [
+        'id',
+        'picture',
+        'name',
+        'dob',
+        'location',
+        'email',
+    ];
+
     public listUsers: MatTableDataSource<any>;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
+
     @ViewChild(MatSort) sort: MatSort;
 
     constructor(private userService: UsersService) {}

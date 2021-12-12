@@ -9,8 +9,6 @@ import { users } from '../data/users';
     providedIn: 'root',
 })
 export class ValidatorsService {
-    constructor() {}
-
     emailRepeat(userEmail: string): Observable<ValidationErrors> {
         return new Observable<ValidationErrors>((observer) => {
             const isEmail = users.find((user) => user.email === userEmail);

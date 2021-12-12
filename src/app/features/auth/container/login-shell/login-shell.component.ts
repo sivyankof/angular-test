@@ -32,7 +32,7 @@ export class LoginShellComponent implements OnInit {
                 },
                 (err) => {
                     this.myForm.errorLogin = err;
-                },
+                }
             );
     }
 

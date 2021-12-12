@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { take } from 'rxjs/operators';
 
@@ -10,12 +10,10 @@ import { RegistrationComponent } from '../../component/registration/registration
     templateUrl: './registration-shell.component.html',
     styleUrls: ['./registration-shell.component.scss'],
 })
-export class RegistrationShellComponent implements OnInit {
+export class RegistrationShellComponent {
     @ViewChild(RegistrationComponent) registration: RegistrationComponent;
 
     constructor(private authService: AuthService, private router: Router) {}
-
-    ngOnInit(): void {}
 
     regNewUser() {
         this.registration.newUserForm.markAllAsTouched();

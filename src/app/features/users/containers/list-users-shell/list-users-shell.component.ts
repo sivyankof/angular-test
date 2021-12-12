@@ -17,7 +17,7 @@ import { IUserState } from '../../store/user.reducers';
     styleUrls: ['./list-users-shell.component.scss'],
 })
 export class ListUsersComponent implements OnInit {
-    public hiddenUsers: boolean = true;
+    public hiddenUsers = true;
 
     public users$ = this.store.select(selectUsers);
 

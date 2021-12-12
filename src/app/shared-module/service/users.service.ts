@@ -51,7 +51,7 @@ export class UsersService {
 
     constructor(private http: HttpClient) {}
 
-    updateUser(user: User, id: string) {
+    updateUser(user: User, id: string): Observable<boolean> {
         users[id] = user;
         return of(true).pipe(delay(1000));
     }
@@ -69,14 +69,7 @@ export class UsersService {
         return of(users).pipe(delay(1000));
     }
 
-    getOneUser(id?: string) {
-        // return this.http.get(this.URL + `/users/${id}`, {
-        //     headers: {
-        //         Accept: `application/vnd.github.v3+json`,
-        //         // authorization: `token ${this.TOKEN}`,
-        //     },
-        // });
-
+    getOneUser() {
         return this.http.get('https://randomuser.me/api/?results=1').pipe(
             map((obj: any) => {
                 return obj.results.map((user: getUser, i: number) => ({
@@ -159,11 +152,7 @@ export class UsersService {
         );
     }
 
-    getRepoIssues(
-        sort: string,
-        order: SortDirection,
-        page: number
-    ): Observable<any> {
+    getRepoIssues(sort: string, order: SortDirection): Observable<any> {
         return this.http.get('https://randomuser.me/api/?results=100').pipe(
             map((obj: any) => {
                 return obj.results.map((user: getUser, i: number) => ({

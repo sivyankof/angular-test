@@ -11,8 +11,6 @@ export class RegistrationComponent implements OnInit {
 
     public errLogin: '';
 
-    constructor() {}
-
     ngOnInit(): void {
         this.newUserForm = new FormGroup({
             login: new FormControl('', [

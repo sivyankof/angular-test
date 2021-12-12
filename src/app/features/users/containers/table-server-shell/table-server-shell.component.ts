@@ -1,10 +1,4 @@
-import {
-    AfterViewInit,
-    Component,
-    OnDestroy,
-    OnInit,
-    ViewChild,
-} from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { EMPTY, merge, Subject } from 'rxjs';
@@ -23,9 +17,7 @@ import { UsersService } from 'src/app/shared-module/service/users.service';
     templateUrl: './table-server-shell.component.html',
     styleUrls: ['./table-server-shell.component.scss'],
 })
-export class TableServerShellComponent
-    implements OnInit, AfterViewInit, OnDestroy
-{
+export class TableServerShellComponent implements AfterViewInit, OnDestroy {
     public displayedColumns: string[] = [
         'id',
         'picture',
@@ -51,8 +43,6 @@ export class TableServerShellComponent
 
     constructor(private userService: UsersService) {}
 
-    ngOnInit() {}
-
     ngAfterViewInit() {
         this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
 
@@ -64,8 +54,7 @@ export class TableServerShellComponent
                     this.isLoadingResults = true;
                     return this.userService!.getRepoIssues(
                         this.sort.active,
-                        this.sort.direction,
-                        this.paginator.pageIndex
+                        this.sort.direction
                     ).pipe(catchError(() => EMPTY));
                 }),
                 map((data) => {

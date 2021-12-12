@@ -20,7 +20,7 @@ export class UsersDetailsShellComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        let id = this.route.snapshot.params.id;
+        const id = this.route.snapshot.params.id;
         this.userService
             .getOneUser(id)
             .pipe(take(1))

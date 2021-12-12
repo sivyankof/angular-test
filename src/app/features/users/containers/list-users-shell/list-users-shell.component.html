@@ -30,11 +30,21 @@
                 {{ hiddenUsers ? 'Show only active users' : 'Show all users' }}
             </button>
 
-            <button class="btn-active-all-users" mat-stroked-button color="warn" (click)="setActiveAllUsers()">
+            <button
+                class="btn-active-all-users"
+                mat-stroked-button
+                color="warn"
+                (click)="setActiveAllUsers()"
+            >
                 Active all users
             </button>
         </div>
-        <button class="btn-show-users" mat-raised-button color="primary" (click)="onShowMoreUser()">
+        <button
+            class="btn-show-users"
+            mat-raised-button
+            color="primary"
+            (click)="onShowMoreUser()"
+        >
             Show more users
         </button>
     </ng-template>

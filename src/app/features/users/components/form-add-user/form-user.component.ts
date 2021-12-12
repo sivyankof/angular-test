@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import {
     FormControl,
     FormGroup,
@@ -17,7 +17,7 @@ import { ValidatorsService } from 'src/app/shared-module/service/validators.serv
     templateUrl: './form-user.component.html',
     styleUrls: ['./form-user.component.scss'],
 })
-export class FormUserComponent implements OnInit, OnDestroy {
+export class FormUserComponent implements OnInit, OnDestroy, OnChanges {
     @Input() user$?: Observable<User>;
 
     public disabledSpinner = true;

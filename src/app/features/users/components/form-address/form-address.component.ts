@@ -29,8 +29,6 @@ export class FormAddressComponent implements OnInit, OnDestroy {
         addresses: new FormArray([]),
     });
 
-    constructor() {}
-
     ngOnInit(): void {
         this.addNewAddress();
         this.childFormAddress.emit(this.currentForm.get('addresses'));

@@ -13,7 +13,7 @@ export class PersonalInfoComponent implements OnInit {
 
     public followers: Observable<Object>;
 
-    public onHideFollower: boolean = false;
+    public onHideFollower = false;
 
     constructor(private userService: UsersService) {}
 

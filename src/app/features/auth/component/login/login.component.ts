@@ -11,8 +11,6 @@ export class LoginComponent implements OnInit {
 
     public errorLogin: string;
 
-    constructor() {}
-
     ngOnInit(): void {
         this.loginForm = new FormGroup({
             login: new FormControl('', [

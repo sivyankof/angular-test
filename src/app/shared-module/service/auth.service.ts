@@ -8,8 +8,6 @@ import { User } from '../interface/user.interface';
     providedIn: 'root',
 })
 export class AuthService {
-    constructor() {}
-
     regNewUser(obj: User): Observable<any> {
         let valid: boolean;
 

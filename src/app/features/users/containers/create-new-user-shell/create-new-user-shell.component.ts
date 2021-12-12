@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
@@ -10,12 +10,10 @@ import { createNewUser } from '../../store/user.actions';
     templateUrl: './create-new-user-shell.component.html',
     styleUrls: ['./create-new-user-shell.component.scss'],
 })
-export class CreateNewUserShellComponent implements OnInit {
+export class CreateNewUserShellComponent {
     @ViewChild(FormUserComponent) childFormUser: FormUserComponent;
 
     constructor(private router: Router, private store: Store) {}
-
-    ngOnInit(): void {}
 
     saveUser() {
         const form = this.childFormUser.saveUser();

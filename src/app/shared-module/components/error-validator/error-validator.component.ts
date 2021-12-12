@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, DoCheck } from '@angular/core';
+import { Component, Input, DoCheck } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -6,7 +6,7 @@ import { FormControl } from '@angular/forms';
     templateUrl: './error-validator.component.html',
     styleUrls: ['./error-validator.component.scss'],
 })
-export class ErrorValidatorComponent implements OnInit, DoCheck {
+export class ErrorValidatorComponent implements DoCheck {
     @Input() control: FormControl;
 
     public errorMessage: string;
@@ -25,12 +25,8 @@ export class ErrorValidatorComponent implements OnInit, DoCheck {
         confirmPass: () => 'Your confirm password mistake',
     };
 
-    constructor() {}
-
-    ngOnInit(): void {}
-
     ngDoCheck() {
-        let typeErr = this.control.errors;
+        const typeErr = this.control.errors;
         for (const err in typeErr) {
             this.errorMessage = this.message[err]();
         }

@@ -33,7 +33,7 @@ export class CanLoadGuard implements CanActivate, CanLoad {
         | Promise<boolean | UrlTree>
         | boolean
         | UrlTree {
-        let loginValid = localStorage.getItem('login');
+        const loginValid = localStorage.getItem('login');
         console.log(loginValid, '<<<<<<<< CAN LOAD');
         console.log(route.path, '<<<<<<<');
         return true;

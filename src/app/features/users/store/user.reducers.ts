@@ -21,50 +21,6 @@ export const initialUserState: IUserState = {
     users: null,
     selectedUser: null,
 };
-
-const reducer = createReducer(
-    initialUserState,
-    on(loadUsersSuccess, (state, { users }) => ({
-        ...state,
-        users: SERVICE.setAllUsers(state, users),
-    })),
-    on(loadNewUsersSuccess, (state, { users }) => {
-        let count = 0;
-        return {
-            ...state,
-            users: SERVICE.loadNewUsers(state, users, count),
-        };
-    }),
-    on(setActivateUser, (state) => ({
-        ...state,
-        users: SERVICE.setActivateAllUsers(state),
-    })),
-    on(userNonActivate, (state, { id }) => ({
-        ...state,
-        users: SERVICE.updateNonActiveUsers(state, id),
-    })),
-    on(selectUserEditSuccess, (state, { user }) => ({
-        ...state,
-        selectedUser: user,
-    })),
-    on(updateUser, (state, { user }) => ({
-        ...state,
-        users: SERVICE.updateOneUser(state, user),
-    })),
-    on(createNewUser, (state, { user }) => ({
-        ...state,
-        users: [...state.users, user],
-    })),
-    on(searchUsersSuccess, (state, { users }) => ({
-        ...state,
-        users,
-    }))
-);
-
-export function UserReducer(state: IUserState, action): IUserState {
-    return reducer(state, action);
-}
-
 const SERVICE = {
     updateNonActiveUsers(state: IUserState, id: string) {
         return state.users.map((user) => {
@@ -100,6 +56,49 @@ const SERVICE = {
         });
     },
 };
+
+const reducer = createReducer(
+    initialUserState,
+    on(loadUsersSuccess, (state, { users }) => ({
+        ...state,
+        users: SERVICE.setAllUsers(state, users),
+    })),
+    on(loadNewUsersSuccess, (state, { users }) => {
+        const count = 0;
+        return {
+            ...state,
+            users: SERVICE.loadNewUsers(state, users, count),
+        };
+    }),
+    on(setActivateUser, (state) => ({
+        ...state,
+        users: SERVICE.setActivateAllUsers(state),
+    })),
+    on(userNonActivate, (state, { id }) => ({
+        ...state,
+        users: SERVICE.updateNonActiveUsers(state, id),
+    })),
+    on(selectUserEditSuccess, (state, { user }) => ({
+        ...state,
+        selectedUser: user,
+    })),
+    on(updateUser, (state, { user }) => ({
+        ...state,
+        users: SERVICE.updateOneUser(state, user),
+    })),
+    on(createNewUser, (state, { user }) => ({
+        ...state,
+        users: [...state.users, user],
+    })),
+    on(searchUsersSuccess, (state, { users }) => ({
+        ...state,
+        users,
+    }))
+);
+
+export function UserReducer(state: IUserState, action): IUserState {
+    return reducer(state, action);
+}
 
 const mergeUser = (currentUser: User, updateUser: User) => {
     const copyUser = { ...currentUser };
